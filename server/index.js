@@ -2,6 +2,9 @@ import express, { urlencoded, json } from "express";
 import cors from "cors";
 import "dotenv/config";
 
+// Database config
+import "./configs/dbConnection";
+
 const app = express();
 app.use(urlencoded({ extended: true }));
 app.use(json());
