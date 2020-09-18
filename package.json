@@ -4,19 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf build/ && babel ../server -d build --ignore node_modules && babel ./package.json -d build --copy-files",
-    "start": "babel-watch index.js"
+    "build": "rimraf build/ && babel ./server -d ./server/build",
+    "dev": "babel-watch ./server/index.js",
+    "start": "npm run build && node ./server/build/index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/dhiraj-deb-au7/connect-x.git"
+    "url": "git+https://github.com/attainu/project-bhumika-bhatt-au7.git"
   },
-  "author": "Dhiraj Deb",
+  "author": "Dhiraj Deb @ Bhumika Bhatt",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/dhiraj-deb-au7/connect-x/issues"
+    "url": "https://github.com/attainu/project-bhumika-bhatt-au7/issues"
   },
-  "homepage": "https://github.com/dhiraj-deb-au7/connect-x#readme",
+  "homepage": "https://github.com/attainu/project-bhumika-bhatt-au7#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
