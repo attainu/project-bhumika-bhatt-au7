@@ -37,6 +37,18 @@ const userSchema = new Schema(
       minlength: 3,
       maxlength: 100,
     },
+
+    country: {
+      type: String,
+      min: 3,
+      maxlength: 100,
+    },
+
+    mobile: {
+      type: String,
+      minlength: 10,
+      maxlength: 15,
+    },
   },
   { versionKey: false, timestamps: true }
 );
