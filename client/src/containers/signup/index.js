@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import M from "materialize-css";
 
 import { SignupPage } from "../../components";
 
@@ -43,9 +44,12 @@ class Signup extends Component {
         password: formdata.password,
       });
 
-      console.log(data);
+      if (data) {
+        M.toast({ html: data.data.message });
+      }
+      history.push("/login");
     } catch (error) {
-      console.log(error);
+      console.dir(error.response);
     }
   };
 

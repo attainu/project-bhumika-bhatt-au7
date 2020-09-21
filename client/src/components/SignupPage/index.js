@@ -22,55 +22,50 @@ const SignupPage = (props) => {
       {error && <Label>{error}</Label>}
       <Form className={classes.Form} onSubmit={submitHandler}>
         <FormGroup>
-          <Label for="firstName">First name</Label>
           <Input
             className={classes.Input}
             id="firstName"
             name="firstName"
             value={firstName}
             onChange={inputHandler}
-            placeholder="Enter your first name"
+            placeholder="First name"
             ref={firstNameRef}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="lastName">Last name</Label>
           <Input
             className={classes.Input}
             id="lastName"
             name="lastName"
             value={lastName}
             onChange={inputHandler}
-            placeholder="Enter your last name"
+            placeholder="Last name"
             ref={lastNameRef}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="email">Email</Label>
           <Input
             className={classes.Input}
             id="email"
             name="email"
             value={email}
             onChange={inputHandler}
-            placeholder="Enter your email id"
+            placeholder="Email"
             ref={emailRef}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="password">Password</Label>
           <Input
             className={classes.Input}
             id="password"
             name="password"
             value={password}
             onChange={inputHandler}
-            placeholder="Enter a passwrod"
+            placeholder="Password"
             ref={passwordRef}
           />
         </FormGroup>
         <FormGroup>
-          <Label for="confirmPassword">Confirm password</Label>
           <Input
             className={classes.Input}
             id="confirmPassword"
@@ -86,7 +81,7 @@ const SignupPage = (props) => {
         </div>
       </Form>
       <div className={classes.LoginImage}>
-        <img src={LoginImage} alt="social Media Image" />
+        <img src={LoginImage} alt="social Media" />
       </div>
     </div>
   );

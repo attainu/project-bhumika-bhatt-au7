@@ -7,11 +7,11 @@ import classes from "./Navbar.module.css";
 const navbar = (props) => {
   return (
     <nav>
-      <div class="nav-wrapper">
+      <div className="nav-wrapper">
         <NavLink to="/" exact class="brand-logo">
           <img className={classes.Logo} src={Logo} alt="connectX" />
         </NavLink>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
           <li>
             <NavLink to="/">ConnectX</NavLink>
           </li>
