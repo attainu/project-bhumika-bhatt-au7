@@ -6,7 +6,7 @@ import "dotenv/config";
 import "./configs/dbConnection";
 
 // Routes
-import { signupRoute } from "./routes";
+import { signupRoute, loginRoute, profileRoute, postRoute } from "./routes";
 
 const app = express();
 app.use(urlencoded({ extended: true }));
@@ -18,6 +18,9 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 
 app.use("/signup", signupRoute);
+app.use("/login", loginRoute);
+app.use("/profile", profileRoute);
+app.use("/posts", postRoute);
 
 // Homepage
 app.use("/", (req, res) => {

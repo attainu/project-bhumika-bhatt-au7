@@ -2,6 +2,18 @@ import { userSchema } from "../schemas";
 import { hashPassword } from "../utils";
 
 class User {
+  login = (user) => {
+    return new Promise((res, rej) => {
+      userSchema.findOne({ email: user.email }, (err, info) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(info);
+        }
+      });
+    });
+  };
+
   signup = (user) => {
     return new Promise(async (res, rej) => {
       const newUser = {
