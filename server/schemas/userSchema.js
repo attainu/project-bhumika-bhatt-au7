@@ -21,6 +21,16 @@ const userSchema = new Schema(
       unique: true,
     },
 
+    userName: {
+      type: String,
+      default: function () {
+        return this.email;
+      },
+      required: true,
+      lowercase: true,
+      unique: true,
+    },
+
     password: {
       type: String,
       required: true,
