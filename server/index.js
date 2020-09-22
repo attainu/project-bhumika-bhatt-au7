@@ -5,6 +5,9 @@ import "dotenv/config";
 // Database config
 import "./configs/dbConnection";
 
+// Routes
+import { loginRoute } from "./routes";
+
 const app = express();
 app.use(urlencoded({ extended: true }));
 app.use(json());
@@ -13,6 +16,8 @@ app.use(cors());
 // Server port
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
+
+app.use("/login", loginRoute);
 
 // Homepage
 app.use("/", (req, res) => {

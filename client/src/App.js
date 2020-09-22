@@ -10,10 +10,8 @@ const App = () => {
     <div className="App">
       <Switch>
         {_.map(routes, (route, idx) => {
-          const user_name = localStorage.getItem("user_name");
-          console.log(route);
           return route.isProtected ? (
-            <PrivateRoute key={idx} {...route} local_user_name={user_name} />
+            <PrivateRoute key={idx} {...route} />
           ) : (
             <PublicRoute key={idx} {...route} />
           );

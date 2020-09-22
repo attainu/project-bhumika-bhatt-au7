@@ -1,15 +1,16 @@
 import React, { Component } from "react";
 import { LoginPage } from "../../components";
-import { USER_DATA, WEB_URL } from "../../config";
+import { WEB_URL } from "../../configs";
 import { connect } from "react-redux";
 import { loginAction } from "../../actions";
+import axios from "axios";
 
 class Login extends Component {
   state = {
     error: "",
     formData: {
-      user_email: "",
-      user_password: "",
+      userEmail: "",
+      userPassword: "",
     },
   };
 
@@ -33,25 +34,18 @@ class Login extends Component {
     const { formData } = this.state;
     const { history } = this.props;
 
-    const userData = {
-      email: formData.user_email,
-      password: formData.user_password,
-    };
-
     try {
-      const user = await USER_DATA.getData(userData);
+      const response = await axios.post("http://localhost:5000/login/api/v1", {
+        email: formData.userEmail,
+        password: formData.userPassword,
+      });
 
-      localStorage.setItem("accessToken", true);
-      localStorage.setItem("user_name", user.name);
-      localStorage.setItem("user_email", user.email);
-
-      this.props.login(user);
+      this.props.login(response.data);
 
       history.push(WEB_URL.DASHBOARD);
-      console.log(history);
     } catch (error) {
-      this.setState({ error: error.message });
-      console.log("Error:", error.message);
+      this.setState({ error: error.response.data });
+      console.log("Error:", error.response.data);
     }
   };
 

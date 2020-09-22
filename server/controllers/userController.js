@@ -12,12 +12,11 @@ const userController = {
           const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
           const { _id, firstName, lastName, email } = user;
           res.json({ token, _id, firstName, lastName, email, _id });
-          console.log(res.json);
         } else {
-          res.status(400).send("password did not match!");
+          res.status(400).send("Password did not match!");
         }
       } else {
-        res.status(404).send("user not found! please signup first...");
+        res.status(404).send("User not found! Please signup first...");
       }
     } catch (error) {
       console.log(error);

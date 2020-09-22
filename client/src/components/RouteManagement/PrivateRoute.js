@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { WEB_URL } from "../../config";
+import { WEB_URL } from "../../configs";
 
 const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
