@@ -1,3 +1,4 @@
 import loginRoute from "./loginRoute";
+import dashboardRoute from "./dashboardRoute";
 
-export default [...loginRoute];
+export default [...loginRoute, ...dashboardRoute];

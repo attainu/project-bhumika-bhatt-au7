@@ -34,8 +34,7 @@ body,
 html {
   height: 100%;
   font-family: Poppins-Regular, sans-serif;
-  background-image: url("../images/bg-01.jpg");
-  background-size: cover;
+  background-color: lightgray;
 }
 
 /*---------------------------------------------*/
@@ -556,4 +555,11 @@ iframe {
       width: 100%;
     }
   }
+}
+
+/* Error */
+.error {
+  color: red;
+  margin: 10px;
+  display: inline;
 }

@@ -69,8 +69,6 @@ const LoginPage = React.memo((props) => {
             >
               <span className="login100-form-title p-b-53">Login With</span>
 
-              {error && <Label style={{ color: "red" }}>{error}</Label>}
-
               <a href="#" className="btn-face m-b-20">
                 <i className="fa fa-facebook-official"></i>
                 Facebook
@@ -80,6 +78,8 @@ const LoginPage = React.memo((props) => {
                 <img src={require("./images/icons/icon-google.png")} />
                 Google
               </a>
+
+              {error && <Label className="error">{error}</Label>}
 
               <FormGroup
                 className="wrap-input100 validate-input"
@@ -94,6 +94,7 @@ const LoginPage = React.memo((props) => {
                   value={userEmail}
                   placeholder="Email"
                   onChange={inputHandler}
+                  required
                 />
                 <span className="focus-input100"></span>
               </FormGroup>
@@ -111,6 +112,7 @@ const LoginPage = React.memo((props) => {
                   value={userPassword}
                   placeholder="Password"
                   onChange={inputHandler}
+                  required
                 />
                 <span className="focus-input100"></span>
               </FormGroup>
@@ -121,9 +123,9 @@ const LoginPage = React.memo((props) => {
                 </a>
               </Container>
 
-              <Container className="container-login100-form-btn m-t-17">
+              <div className="container-login100-form-btn m-t-17">
                 <Button className="login100-form-btn">Login</Button>
-              </Container>
+              </div>
 
               <Container className="w-full text-center p-t-55">
                 <span className="txt2">Not a member? </span>

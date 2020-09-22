@@ -40,6 +40,9 @@ class Login extends Component {
         password: formData.userPassword,
       });
 
+      localStorage.setItem("isAuth", true);
+      localStorage.setItem("firstName", response.data.firstName);
+
       this.props.login(response.data);
 
       history.push(WEB_URL.DASHBOARD);

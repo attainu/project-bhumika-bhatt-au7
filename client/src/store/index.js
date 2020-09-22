@@ -5,6 +5,6 @@ import reducers from "../reducers";
 
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
-// store.subscribe(() => console.log(store.getState()));
+store.subscribe(() => console.log(store.getState()));
 
 export default store;

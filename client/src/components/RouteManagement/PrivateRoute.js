@@ -4,7 +4,7 @@ import { WEB_URL } from "../../configs";
 
 const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
-  const isAuth = !!localStorage.getItem("accessToken");
+  const isAuth = localStorage.getItem("isAuth");
 
   return (
     <Route

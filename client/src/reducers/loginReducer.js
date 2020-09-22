@@ -1,8 +1,12 @@
 import { LOGIN } from "../configs/actionTypes";
 
 const initialState = {
-  name: "",
+  firstName: "",
+  lastName: "",
   email: "",
+  userName: "",
+  country: "",
+  mobile: "",
 };
 
 const loginReducer = (state, action) => {
@@ -11,14 +15,22 @@ const loginReducer = (state, action) => {
   switch (action.type) {
     case LOGIN: {
       const user = {
-        name: action.payload.name,
+        firstName: action.payload.firstName,
+        lastName: action.payload.lastName,
         email: action.payload.email,
+        userName: action.payload.userName,
+        country: action.payload.country,
+        mobile: action.payload.mobile,
       };
 
       return {
         ...state,
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
+        userName: user.userName,
+        country: user.country,
+        mobile: user.mobile,
       };
     }
     default: {
