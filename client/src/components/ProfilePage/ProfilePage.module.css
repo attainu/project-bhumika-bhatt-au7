@@ -1,0 +1,16 @@
+.Container {
+  margin: 0px auto;
+}
+
+.ProfileDes {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid grey;
+  margin: 18px 0px;
+}
+
+.Image img {
+  width: 160px;
+  height: 160px;
+  border-radius: 80px;
+}
