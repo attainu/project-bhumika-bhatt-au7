@@ -1,18 +1,21 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
+import _ from "lodash";
 
-import Navbar from "./components/UI/Navbar/Navbar";
-import { Signup } from "./containers";
+import { PrivateRoute, PublicRoute } from "./components";
+import routes from "./routes";
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <Switch>
-        <Route path="/signup" component={Signup} />
-        <Route path="/" />
-      </Switch>
-    </div>
+    <Switch>
+      {_.map(routes, (route, idx) => {
+        return route.isProtected ? (
+          <PrivateRoute key={idx} {...route} />
+        ) : (
+          <PublicRoute key={idx} {...route} />
+        );
+      })}
+    </Switch>
   );
 };
 
