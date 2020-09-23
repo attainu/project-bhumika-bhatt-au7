@@ -46,7 +46,7 @@ class Login extends Component {
 
       this.props.login(response.data);
 
-      history.push(WEB_URL.DASHBOARD);
+      history.push("/");
     } catch (error) {
       this.setState({ error: error.response.data });
       console.log("Error:", error.response.data);
