@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Navbar from "./components/UI/Navbar/Navbar";
-import { Signup } from "./containers";
+import { Signup, Posts, HomePage } from "./containers";
 
 const App = () => {
   return (
@@ -10,7 +10,8 @@ const App = () => {
       <Navbar />
       <Switch>
         <Route path="/signup" component={Signup} />
-        <Route path="/" />
+        <Route path="/profile" component={Posts} />
+        <Route path="/" component={HomePage} />
       </Switch>
     </div>
   );

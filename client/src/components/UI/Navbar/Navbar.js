@@ -21,6 +21,9 @@ const navbar = (props) => {
           <li>
             <NavLink to="/signup">SignUp</NavLink>
           </li>
+          <li>
+            <NavLink to="/profile">Profile</NavLink>
+          </li>
         </ul>
       </div>
     </nav>
