@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import M from "materialize-css";
 import axios from "axios";
 
 import { AuthenticationPage } from "../../components";
@@ -55,12 +56,13 @@ class Authentication extends Component {
       });
 
       if (data) {
-        // M.toast({ html: data.data.message });
+        M.toast({ html: data.data.message });
         console.log(data);
       }
       history.push(WEB_URL.AUTHENTICATION);
     } catch (error) {
-      console.dir(error.response);
+      M.toast({ html: error.response.data.error });
+      console.log("Error:", error.response.data);
     }
   };
 
@@ -71,7 +73,7 @@ class Authentication extends Component {
     const { history } = this.props;
 
     try {
-      const response = await axios.post("http://localhost:5000/login/api/v1", {
+      const response = await axios.post("/login/api/v1", {
         email: loginFormData.loginEmail,
         password: loginFormData.loginPassword,
       });
@@ -84,8 +86,9 @@ class Authentication extends Component {
 
       history.push(WEB_URL.HOMEPAGE);
     } catch (error) {
+      M.toast({ html: error.response.data });
       console.log("Error:", error.response.data);
-      this.setState({ error: error.response.data });
+      // this.setState({ error: error.response.data });
     }
   };
 

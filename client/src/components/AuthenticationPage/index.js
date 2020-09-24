@@ -35,6 +35,7 @@ const AuthenticationPage = (props) => {
             onChange={inputHandler}
             placeholder="First name"
             ref={firstNameRef}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -57,6 +58,7 @@ const AuthenticationPage = (props) => {
             onChange={inputHandler}
             placeholder="Email"
             ref={emailRef}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -68,6 +70,7 @@ const AuthenticationPage = (props) => {
             onChange={inputHandler}
             placeholder="Password"
             ref={passwordRef}
+            required
           />
         </FormGroup>
         <FormGroup>
@@ -79,6 +82,7 @@ const AuthenticationPage = (props) => {
             onChange={inputHandler}
             placeholder="Confirm password"
             ref={confirmPasswordRef}
+            required
           />
         </FormGroup>
         <div>
@@ -98,6 +102,7 @@ const AuthenticationPage = (props) => {
               onChange={inputHandler}
               placeholder="Email"
               ref={loginEmailRef}
+              required
             />
           </FormGroup>
           <FormGroup>
@@ -109,6 +114,7 @@ const AuthenticationPage = (props) => {
               onChange={inputHandler}
               placeholder="Password"
               ref={loginPasswordRef}
+              required
             />
           </FormGroup>
           <div>
