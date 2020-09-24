@@ -1,66 +1,29 @@
-import React, { useState } from "react";
-import {
-  Collapse,
-  Navbar,
-  NavbarToggler,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText,
-  Form,
-  Input,
-  Button,
-} from "reactstrap";
+import React from "react";
+import { NavLink } from "react-router-dom";
 
-const NavbarLayout = (props) => {
-  const [isOpen, setIsOpen] = useState(false);
+import Logo from "./images/logo (32x32).png";
 
-  const toggle = () => setIsOpen(!isOpen);
-
+const navbar = (props) => {
   return (
-    <div>
-      <Navbar color="light" light expand="md">
-        <NavbarBrand href="/">connectX</NavbarBrand>
-        <NavbarToggler onClick={toggle} />
-        <Collapse isOpen={isOpen} navbar>
-          <NavItem>
-            <NavLink href="/feeds">Feeds</NavLink>
-          </NavItem>
-          <NavItem className="form-inline">
-            <Form class="my-2 my-lg-0">
-              <Button
-                class="btn btn-outline-success my-2 my-sm-0"
-                type="submit"
-              >
-                Search
-              </Button>
-              <Input
-                class="form-control mr-sm-2"
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-              />
-            </Form>
-          </NavItem>
-          <UncontrolledDropdown className="ml-auto" nav inNavbar>
-            <DropdownToggle nav caret>
-              Account
-            </DropdownToggle>
-            <DropdownMenu right>
-              <DropdownItem>Profile</DropdownItem>
-              <DropdownItem divider />
-              <DropdownItem>Logout</DropdownItem>
-            </DropdownMenu>
-          </UncontrolledDropdown>
-        </Collapse>
-      </Navbar>
-    </div>
+    <nav>
+      <div className="nav-wrapper">
+        <NavLink to="/" exact className="brand-logo">
+          <img src={Logo} alt="connectX" />
+        </NavLink>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+          <li>
+            <NavLink to="/">ConnectX</NavLink>
+          </li>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="/signup">SignUp</NavLink>
+          </li>
+        </ul>
+      </div>
+    </nav>
   );
 };
 
-export default NavbarLayout;
+export default navbar;

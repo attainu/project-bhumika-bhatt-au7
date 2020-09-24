@@ -11,7 +11,7 @@ const PublicRoute = (props) => {
       {...rest}
       render={(routeProps) => {
         return isAuth ? (
-          <Redirect to={WEB_URL.DASHBOARD} />
+          <Redirect to={WEB_URL.HOMEPAGE} />
         ) : (
           <Component {...rest} {...routeProps} />
         );
