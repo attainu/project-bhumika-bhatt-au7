@@ -13,7 +13,7 @@ const PrivateRoute = (props) => {
         return isAuth ? (
           <Component {...rest} {...routeProps} />
         ) : (
-          <Redirect to={WEB_URL.LOGIN} />
+          <Redirect to={WEB_URL.AUTHENTICATION} />
         );
       }}
     />
