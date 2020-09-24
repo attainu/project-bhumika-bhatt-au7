@@ -1,12 +1,12 @@
 import React from "react";
-import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { TextInput, Button } from "react-materialize";
 
 import classes from "./AuthenticationPage.module.css";
 // import LoginImage from "../../assets/images/Home-Page-login.jpg";
 
 const AuthenticationPage = (props) => {
   const {
-    error,
+    // error,
     submitHandler,
     inputHandler,
     signupFormData: { firstName, lastName, email, password, confirmPassword },
@@ -14,7 +14,7 @@ const AuthenticationPage = (props) => {
     loginEmailRef,
     loginPasswordRef,
     loginSubmitHandler,
-    loginError,
+    // loginError,
     firstNameRef,
     lastNameRef,
     emailRef,
@@ -24,10 +24,10 @@ const AuthenticationPage = (props) => {
 
   return (
     <div className={classes.Container}>
-      {error && <Label>{error}</Label>}
-      <Form className={classes.Form} onSubmit={submitHandler}>
-        <FormGroup>
-          <Input
+      {/* {error && <Label>{error}</Label>} */}
+      <form className={classes.Form} onSubmit={submitHandler}>
+        <div>
+          <TextInput
             className={classes.Input}
             id="firstName"
             name="firstName"
@@ -37,10 +37,10 @@ const AuthenticationPage = (props) => {
             ref={firstNameRef}
             required
           />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            className={classes.Input}
+        </div>
+        <div>
+          <TextInput
+            className={classes.TextInput}
             id="lastName"
             name="lastName"
             value={lastName}
@@ -48,10 +48,10 @@ const AuthenticationPage = (props) => {
             placeholder="Last name"
             ref={lastNameRef}
           />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            className={classes.Input}
+        </div>
+        <div>
+          <TextInput
+            className={classes.TextInput}
             id="email"
             name="email"
             value={email}
@@ -60,10 +60,10 @@ const AuthenticationPage = (props) => {
             ref={emailRef}
             required
           />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            className={classes.Input}
+        </div>
+        <div>
+          <TextInput
+            className={classes.TextInput}
             id="password"
             name="password"
             value={password}
@@ -72,10 +72,10 @@ const AuthenticationPage = (props) => {
             ref={passwordRef}
             required
           />
-        </FormGroup>
-        <FormGroup>
-          <Input
-            className={classes.Input}
+        </div>
+        <div>
+          <TextInput
+            className={classes.TextInput}
             id="confirmPassword"
             name="confirmPassword"
             value={confirmPassword}
@@ -84,18 +84,18 @@ const AuthenticationPage = (props) => {
             ref={confirmPasswordRef}
             required
           />
-        </FormGroup>
+        </div>
         <div>
           <Button type="submit">Signup</Button>
         </div>
-      </Form>
+      </form>
       <div className={classes.LoginImage}>
         {/* <img src={LoginImage} alt="social Media" /> */}
-        {loginError && <Label>{loginError}</Label>}
-        <Form className={classes.login} onSubmit={loginSubmitHandler}>
-          <FormGroup>
-            <Input
-              className={classes.Input}
+        {/* {loginError && <Label>{loginError}</Label>} */}
+        <form className={classes.login} onSubmit={loginSubmitHandler}>
+          <div>
+            <TextInput
+              className={classes.TextInput}
               id="email"
               name="loginEmail"
               value={loginEmail}
@@ -105,10 +105,10 @@ const AuthenticationPage = (props) => {
               required
               autoFocus
             />
-          </FormGroup>
-          <FormGroup>
-            <Input
-              className={classes.Input}
+          </div>
+          <div>
+            <TextInput
+              className={classes.TextInput}
               id="password"
               name="loginPassword"
               value={loginPassword}
@@ -117,11 +117,11 @@ const AuthenticationPage = (props) => {
               ref={loginPasswordRef}
               required
             />
-          </FormGroup>
+          </div>
           <div>
             <Button type="submit">Login</Button>
           </div>
-        </Form>
+        </form>
       </div>
     </div>
   );
