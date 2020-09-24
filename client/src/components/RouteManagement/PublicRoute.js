@@ -1,6 +1,8 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
+
 import { WEB_URL } from "../../configs";
+import { Navbar } from "../../containers";
 
 const PublicRoute = (props) => {
   const { component: Component, ...rest } = props;
@@ -8,12 +10,11 @@ const PublicRoute = (props) => {
 
   return (
     <Route
-      {...rest}
       render={(routeProps) => {
         return isAuth ? (
           <Redirect to={WEB_URL.HOMEPAGE} />
         ) : (
-          <Component {...rest} {...routeProps} />
+          [<Navbar key={0} />, <Component {...rest} {...routeProps} key={1} />]
         );
       }}
     />
