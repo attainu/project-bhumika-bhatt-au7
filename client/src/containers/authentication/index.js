@@ -48,22 +48,41 @@ class Authentication extends Component {
     try {
       const { signupFormData } = this.state;
       const { history } = this.props;
-      const data = await axios.post("/signup/api/v1", {
-        firstName: signupFormData.firstName,
-        lastName: signupFormData.lastName,
-        email: signupFormData.email,
-        password: signupFormData.password,
-      });
 
-      if (data) {
-        M.toast({ html: data.data.message });
-        console.log(data);
+      if (signupFormData.password === signupFormData.confirmPassword) {
+        const data = await axios.post("/signup/api/v1", {
+          firstName: signupFormData.firstName,
+          lastName: signupFormData.lastName,
+          email: signupFormData.email,
+          password: signupFormData.password,
+        });
+
+        if (data) {
+          M.toast({ html: data.data.message });
+          this.clearFields();
+          history.push(WEB_URL.HOMEPAGE);
+          console.log(data);
+        }
+      } else {
+        M.toast({ html: "Password did not match!" });
       }
-      history.push(WEB_URL.AUTHENTICATION);
     } catch (error) {
       M.toast({ html: error.response.data.error });
       console.log("Error:", error.response.data);
     }
+  };
+
+  clearFields = () => {
+    this.setState({
+      signupFormData: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+    });
+    console.log("Fields cleared");
   };
 
   loginSubmitHandler = async (e) => {

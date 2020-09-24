@@ -103,6 +103,7 @@ const AuthenticationPage = (props) => {
               placeholder="Email"
               ref={loginEmailRef}
               required
+              autoFocus
             />
           </FormGroup>
           <FormGroup>
