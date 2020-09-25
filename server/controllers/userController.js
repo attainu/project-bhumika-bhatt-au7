@@ -10,8 +10,8 @@ const userController = {
       if (user) {
         if (await comparePassword(req.body.password, user.password)) {
           const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
-          const { _id, firstName, lastName, email } = user;
-          res.status(200).send({ token, firstName, lastName, email, _id });
+          const { _id, firstName } = user;
+          res.status(200).send({ token, firstName, _id });
         } else {
           res.status(400).send("Password did not match!");
         }

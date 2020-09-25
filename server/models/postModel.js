@@ -21,7 +21,6 @@ class Post {
         photo: post.photo,
         postedBy: Req,
       };
-
       postSchema.create(newPost, (err, info) => {
         if (err) {
           rej(err);

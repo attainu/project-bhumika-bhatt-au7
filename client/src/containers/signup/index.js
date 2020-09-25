@@ -49,7 +49,8 @@ class Signup extends Component {
       }
       history.push("/login");
     } catch (error) {
-      console.dir(error.response);
+      // M.toast({ html: error.response.data.error });
+      // console.log(error.response.data.error);
     }
   };
 
