@@ -53,7 +53,6 @@ const navbar = (props) => {
           <a href="/settings" onClick={getUserProfile}>
             Settings
           </a>
-          <Divider />
           <a href="/#" onClick={logoutHandler}>
             Logout
           </a>
