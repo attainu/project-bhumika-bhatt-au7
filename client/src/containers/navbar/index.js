@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import { NavbarLayout } from "../../components";
-import { compareSync } from "bcryptjs";
 
 class Navbar extends Component {
   state = {
