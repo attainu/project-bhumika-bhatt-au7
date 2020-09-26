@@ -2,7 +2,7 @@ import React from "react";
 import { Navbar, Icon, Dropdown, Divider } from "react-materialize";
 
 const navbar = (props) => {
-  const { isProtected, logoutHandler } = props;
+  const { isProtected, logoutHandler, getUserProfile } = props;
   return (
     <Navbar
       alignLinks="right"
@@ -50,7 +50,9 @@ const navbar = (props) => {
           }
         >
           <a href="/profile">Profile</a>
-          <a href="/settings">Settings</a>
+          <a href="/settings" onClick={getUserProfile}>
+            Settings
+          </a>
           <Divider />
           <a href="/#" onClick={logoutHandler}>
             Logout
