@@ -14,6 +14,18 @@ class Profile {
     });
   };
 
+  getUserProfile = (id) => {
+    return new Promise((res, rej) => {
+      userSchema.findOne({ _id: id }, (err, info) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(info);
+        }
+      });
+    });
+  };
+
   updateUser = (user) => {
     return new Promise((res, rej) => {
       userSchema.updateOne(
