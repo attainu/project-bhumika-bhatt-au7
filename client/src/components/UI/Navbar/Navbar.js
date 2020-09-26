@@ -2,14 +2,13 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import Logo from "../../../assets/images/logo.png";
-import classes from "./Navbar.module.css";
 
 const navbar = (props) => {
   return (
     <nav>
       <div className="nav-wrapper blue">
         <NavLink to="/" exact class="brand-logo left">
-          <img className={classes.Logo} src={Logo} alt="connectX" />
+          <img src={Logo} alt="connectX" />
         </NavLink>
         <ul id="nav-mobile" className="right ">
           <li>

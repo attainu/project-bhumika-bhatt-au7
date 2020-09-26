@@ -1,4 +1,4 @@
-import loginRoute from "./loginRoute";
+import authenticationRoute from "./authenticationRoute";
 import dashboardRoute from "./dashboardRoute";
 
-export default [...loginRoute, ...dashboardRoute];
+export default [...authenticationRoute, ...dashboardRoute];

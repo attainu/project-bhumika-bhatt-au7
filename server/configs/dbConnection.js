@@ -1,6 +1,6 @@
 import { connect } from "mongoose";
 
-connect(process.env.ATLAS, {
+connect(process.env.LOCAL, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

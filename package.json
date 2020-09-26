@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "rimraf build/ && babel ./server -d ./server/build",
+    "build": "rimraf build/server && babel ./server -d dest/server",
     "dev": "babel-watch ./server/index.js",
-    "start": "npm run build && node ./server/build/index.js"
+    "start": "npm run build && node dest/server/index.js"
   },
   "repository": {
     "type": "git",
