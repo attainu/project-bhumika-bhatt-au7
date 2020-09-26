@@ -25,7 +25,6 @@ class Post {
         if (err) {
           rej(err);
         } else {
-          console.log(info);
           res(info);
         }
       });

@@ -8,10 +8,6 @@ import { ProfilePage } from "../../components";
 
 class Posts extends Component {
   componentDidMount = () => {
-    getMyPost();
-  };
-
-  getMyPost = async () => {
     const userId = localStorage.getItem("id");
     try {
       const myPost = await axios.get("posts/myPosts", userId, {
@@ -22,6 +18,7 @@ class Posts extends Component {
       M.toast({ html: error.response.data });
     }
   };
+
 
   deletePostHandler = (id) => {
     try {
