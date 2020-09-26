@@ -27,15 +27,15 @@ app.use("/profile", profileRoute);
 app.use("/posts", postRoute);
 
 // Homepage
-app.get("/", (req, res) => {
+app.use("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../build", "index.html"));
 });
 
-app.get("/authentication", (req, res) => {
-  res.redirect("/");
-});
+// app.get("/authentication", (req, res) => {
+//   res.redirect("/");
+// });
 
 // Invalid path handler
-app.use((req, res) => {
-  res.send(`<h1>Error 404! Path not found...<h1>`);
-});
+// app.use((req, res) => {
+//   res.send(`<h1>Error 404! Path not found...<h1>`);
+// });
