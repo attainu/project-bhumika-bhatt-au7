@@ -1,7 +1,7 @@
 import { WEB_URL } from "../configs";
 import { Settings } from "../containers";
 
-const settingsRoutes = [
+const settingsRoute = [
   {
     path: WEB_URL.SETTINGS,
     exact: true,
@@ -10,4 +10,4 @@ const settingsRoutes = [
   },
 ];
 
-export default settingsRoutes;
+export default settingsRoute;
