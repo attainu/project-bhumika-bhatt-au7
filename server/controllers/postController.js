@@ -11,7 +11,9 @@ const postController = {
   },
   createPost: async (req, res) => {
     try {
+      console.log(req.user);
       const posts = await Post.createPost(req.user, req.body);
+      console.log(posts);
       res.status(200).json({ posts });
     } catch (error) {
       console.log(error);

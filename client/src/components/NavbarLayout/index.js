@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import Logo from "./images/logo (32x32).png";
+import Logo from "../../assets/images/logo.png";
 
 const navbar = (props) => {
   return (
@@ -19,6 +19,9 @@ const navbar = (props) => {
           </li>
           <li>
             <NavLink to="/signup">SignUp</NavLink>
+          </li>
+          <li>
+            <NavLink to="/createPost">SignUp</NavLink>
           </li>
         </ul>
       </div>
