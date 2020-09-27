@@ -1,17 +1,22 @@
 import React from "react";
-import { Route, Redirect } from "react-router-dom";
+import { Route, Redirect, useHistory } from "react-router-dom";
+
 import { WEB_URL } from "../../configs";
+import { Navbar } from "../../containers";
 
 const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
   const isAuth = localStorage.getItem("token");
+  const history = useHistory();
 
   return (
     <Route
-      {...rest}
       render={(routeProps) => {
         return isAuth ? (
-          <Component {...rest} {...routeProps} />
+          [
+            <Navbar isProtected key={0} history={history} />,
+            <Component {...rest} {...routeProps} key={1} />,
+          ]
         ) : (
           <Redirect to={WEB_URL.AUTHENTICATION} />
         );

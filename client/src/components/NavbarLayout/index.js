@@ -1,31 +1,64 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-
-import Logo from "../../assets/images/logo.png";
+import { Navbar, Icon, Dropdown, Divider } from "react-materialize";
 
 const navbar = (props) => {
+  const { isProtected, logoutHandler, getUserProfile } = props;
   return (
-    <nav>
-      <div className="nav-wrapper">
-        <NavLink to="/" exact className="brand-logo">
-          <img src={Logo} alt="connectX" />
-        </NavLink>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-          <li>
-            <NavLink to="/">ConnectX</NavLink>
-          </li>
-          <li>
-            <NavLink to="/login">Login</NavLink>
-          </li>
-          <li>
-            <NavLink to="/signup">SignUp</NavLink>
-          </li>
-          <li>
-            <NavLink to="/createPost">SignUp</NavLink>
-          </li>
-        </ul>
-      </div>
-    </nav>
+    <Navbar
+      alignLinks="right"
+      brand={
+        <a className="brand-logo" href="/">
+          connectX
+        </a>
+      }
+      id="mobile-nav"
+      menuIcon={<Icon>menu</Icon>}
+      options={{
+        draggable: true,
+        edge: "left",
+        inDuration: 250,
+        onCloseEnd: null,
+        onCloseStart: null,
+        onOpenEnd: null,
+        onOpenStart: null,
+        outDuration: 200,
+        preventScrolling: true,
+      }}
+    >
+      {isProtected && (
+        <Dropdown
+          id="account"
+          options={{
+            alignment: "left",
+            autoTrigger: true,
+            closeOnClick: true,
+            constrainWidth: true,
+            container: null,
+            coverTrigger: true,
+            hover: false,
+            inDuration: 150,
+            onCloseEnd: null,
+            onCloseStart: null,
+            onOpenEnd: null,
+            onOpenStart: null,
+            outDuration: 250,
+          }}
+          trigger={
+            <a href="/#">
+              Account <Icon right>arrow_drop_down</Icon>
+            </a>
+          }
+        >
+          <a href="/profile">Profile</a>
+          <a href="/settings" onClick={getUserProfile}>
+            Settings
+          </a>
+          <a href="/#" onClick={logoutHandler}>
+            Logout
+          </a>
+        </Dropdown>
+      )}
+    </Navbar>
   );
 };
 

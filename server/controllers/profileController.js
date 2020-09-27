@@ -4,7 +4,21 @@ const profileController = {
   getUser: async (req, res) => {
     try {
       const user = await Profile.getUser(req.params.userName);
-      res.status(200).send(user);
+      const { firstName, lastName, userName } = user;
+      res.status(200).send({ firstName, lastName, userName });
+    } catch (error) {
+      console.log(error);
+      res.status(400).send(error._message);
+    }
+  },
+
+  getUserProfile: async (req, res) => {
+    try {
+      const user = await Profile.getUserProfile(req.params.id);
+      const { firstName, lastName, userName, email, country, mboile } = user;
+      res
+        .status(200)
+        .send({ firstName, lastName, userName, email, country, mboile });
     } catch (error) {
       console.log(error);
       res.status(400).send(error._message);

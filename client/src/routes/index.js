@@ -1,4 +1,11 @@
 import authenticationRoute from "./authenticationRoute";
-import dashboardRoute from "./dashboardRoute";
+import homepageRoute from "./homepageRoute";
+import settingsRoute from "./settingsRoute";
+import profileRoute from "./profileRoute";
 
-export default [...authenticationRoute, ...dashboardRoute];
+export default [
+  ...authenticationRoute,
+  ...homepageRoute,
+  ...settingsRoute,
+  ...profileRoute,
+];

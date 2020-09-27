@@ -1,18 +1,21 @@
 import React from "react";
-import { Route, Switch } from "react-router-dom";
+import { Switch } from "react-router-dom";
 import _ from "lodash";
 
-import { Posts, HomePage, CreatePost, Login } from "./containers";
+import { PrivateRoute, PublicRoute } from "./components";
+import routes from "./routes";
 
 const App = () => {
   return (
-    <div>
-      <Switch>
-        <Route path="/profile" component={Posts} />
-        <Route path="/create" component={CreatePost} />
-        <Route path="/" component={HomePage} />
-      </Switch>
-    </div>
+    <Switch>
+      {_.map(routes, (route, idx) => {
+        return route.isProtected ? (
+          <PrivateRoute key={idx} {...route} />
+        ) : (
+          <PublicRoute key={idx} {...route} />
+        );
+      })}
+    </Switch>
   );
 };
 
