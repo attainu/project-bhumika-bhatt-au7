@@ -15,10 +15,18 @@ const profileController = {
   getUserProfile: async (req, res) => {
     try {
       const user = await Profile.getUserProfile(req.params.id);
-      const { firstName, lastName, userName, email, country, mboile } = user;
+      const {
+        _id,
+        firstName,
+        lastName,
+        userName,
+        email,
+        country,
+        mobile,
+      } = user;
       res
         .status(200)
-        .send({ firstName, lastName, userName, email, country, mboile });
+        .send({ _id, firstName, lastName, userName, email, country, mobile });
     } catch (error) {
       console.log(error);
       res.status(400).send(error._message);
@@ -26,6 +34,7 @@ const profileController = {
   },
 
   updateUser: async (req, res) => {
+    console.log("Profile", req.body);
     try {
       const info = await Profile.updateUser(req.body);
       res.status(200).send("user details updated successfully!");
