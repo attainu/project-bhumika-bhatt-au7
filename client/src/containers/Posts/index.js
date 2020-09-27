@@ -8,11 +8,11 @@ import { ProfilePage } from "../../components";
 
 class Posts extends Component {
   componentDidMount = async () => {
-    const userId = localStorage.getItem("id");
     try {
-      const myPost = await axios.get("posts/myPosts", userId, {
+      const myPost = await axios.get("posts/myPost", {
         headers: { authorization: "Bearer " + localStorage.getItem("token") },
       });
+      console.log(myPost);
       this.props.myPost(myPost.data);
     } catch (error) {
       M.toast({ html: error.response.data });
@@ -29,7 +29,7 @@ class Posts extends Component {
   render() {
     return (
       <div>
-        <ProfilePage posts={this.props.myPosts} />
+        <ProfilePage posts={this.props.myPosts} userName={this.props.user} />
       </div>
     );
   }

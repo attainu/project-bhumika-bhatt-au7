@@ -143,7 +143,7 @@ class Post {
     return new Promise(async (res, rej) => {
       postSchema
         .findOne({ _id: id })
-        .populate("postedBy", "_id pic")
+        .populate("postedBy", "_id")
         .exec((err, info) => {
           if (err) {
             rej(err);

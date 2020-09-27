@@ -11,12 +11,9 @@ const postController = {
   },
   createPost: async (req, res) => {
     try {
-      console.log(req.user);
       const posts = await Post.createPost(req.user, req.body);
-      console.log(posts);
       res.status(200).json({ posts });
     } catch (error) {
-      console.log(error);
       res.status(400).send(error._message);
     }
   },
@@ -55,21 +52,21 @@ const postController = {
   commentPost: async (req, res) => {
     try {
       const comments = await Post.commentedPost(req.user, req.body);
-      await comments.populate("comments.postedBy", "_id firstName");
       res.status(200).json({ comments });
     } catch (error) {
       res.status(400).send(error._message);
     }
   },
   deletePost: async (req, res) => {
+    console.log(req.params.postId);
     try {
       const post = await Post.deletedPost(req.params.postId);
       if (!post) {
         return res.status(404).json({ message: "post not found" });
       }
-      if (post.postedBy.toString() === req.user._id.toString()) {
+      if (post.postedBy._id.toString() === req.user._id.toString()) {
         await post.remove();
-        return res.json({ message: "successfully deleted" });
+        return res.json(post);
       } else {
         console.log("not deleted");
       }

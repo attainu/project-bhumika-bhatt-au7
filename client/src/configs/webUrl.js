@@ -3,4 +3,5 @@ export default {
   HOMEPAGE: "/",
   SETTINGS: "/settings",
   PROFILE: "/profile",
+  CREATE: "/create",
 };
