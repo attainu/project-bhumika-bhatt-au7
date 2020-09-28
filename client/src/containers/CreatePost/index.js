@@ -53,19 +53,20 @@ class createPost extends Component {
     } catch (error) {
       console.log(error);
     }
-
-    try {
-      const data = {
-        title: formdata.title,
-        description: formdata.description,
-        photo: formdata.url,
-      };
-      const post = await axios.post("posts/createPost", data, {
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
-      });
-      console.log(post);
-    } catch (error) {
-      M.toast({ html: error.response.data });
+    if (formdata.url !== "") {
+      try {
+        const data = {
+          title: formdata.title,
+          description: formdata.description,
+          photo: formdata.url,
+        };
+        const post = await axios.post("posts/createPost", data, {
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        });
+        console.log(post);
+      } catch (error) {
+        M.toast({ html: error.response.data });
+      }
     }
   };
 

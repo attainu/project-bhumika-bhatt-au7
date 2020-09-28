@@ -13,9 +13,8 @@ const Auth = (req, res, next) => {
       return res.status(401).json({ error: "You must login first!!!" });
     }
     const { _id } = info;
-    userSchema.find({ _id }).then((data) => {
+    userSchema.findOne({ _id }).then((data) => {
       req.user = data;
-      console.log(req.user);
       next();
     });
   });
