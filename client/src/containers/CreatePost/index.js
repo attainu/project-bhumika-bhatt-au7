@@ -55,14 +55,19 @@ class createPost extends Component {
     }
     if (formdata.url !== "") {
       try {
-        const data = {
-          title: formdata.title,
-          description: formdata.description,
-          photo: formdata.url,
-        };
-        const post = await axios.post("posts/createPost", data, {
-          headers: { authorization: "Bearer " + localStorage.getItem("token") },
-        });
+        const post = await axios.post(
+          "posts/createPost",
+          {
+            title: formdata.title,
+            description: formdata.description,
+            photo: formdata.url,
+          },
+          {
+            headers: {
+              authorization: "Bearer " + localStorage.getItem("token"),
+            },
+          }
+        );
         console.log(post);
       } catch (error) {
         M.toast({ html: error.response.data });

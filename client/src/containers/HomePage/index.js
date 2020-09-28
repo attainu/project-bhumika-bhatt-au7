@@ -7,6 +7,10 @@ import { getPost } from "../../actions";
 import { HomePage } from "../../components";
 
 class index extends Component {
+  state = {
+    renderPost: false,
+    likes: [],
+  };
   componentDidMount = async () => {
     try {
       const posts = await axios.get("/posts", {
@@ -17,6 +21,8 @@ class index extends Component {
       M.toast({ html: error });
     }
   };
+
+  componentDidUpdate = () => {};
 
   likePost = async (postId) => {
     try {
@@ -29,6 +35,7 @@ class index extends Component {
       );
       const newData = this.props.allPost.map((item) => {
         if (item._id === likes._id) {
+          this.setState({ likes: likes });
           return likes;
         } else {
           return item;
@@ -99,15 +106,23 @@ class index extends Component {
     }
   };
 
+  renderCreatePost = (e) => {
+    e.preventDefault();
+    this.setState({ renderPost: true });
+  };
+
   render() {
     return (
       <div>
         <HomePage
           posts={this.props.allPost}
           like={this.likePost}
+          likes={this.state.likes}
           unlike={this.unlikePost}
           comment={this.commentingPost}
           delete={this.deletingPost}
+          renderPost={this.state.renderPost}
+          renderCreatePost={this.renderCreatePost}
         />
       </div>
     );
