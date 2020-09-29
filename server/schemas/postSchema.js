@@ -1,11 +1,11 @@
-import { model, Schema } from "mongoose";
+import { model, Schema, set } from "mongoose";
 const { ObjectId } = Schema.Types;
 
 const PostSchema = new Schema(
   {
     title: {
       type: String,
-      required: true,
+      // required: true,
     },
     description: {
       type: String,
@@ -13,9 +13,9 @@ const PostSchema = new Schema(
     },
     photo: {
       type: String,
-      required: true,
+      // required: true,
     },
-    likes: [{ type: ObjectId, ref: "Users" }],
+    likes: [{ type: ObjectId, isLiked: Boolean, ref: "Users" }],
     comments: [{ text: String, postedBy: { type: ObjectId, ref: "Users" } }],
     postedBy: {
       type: ObjectId,

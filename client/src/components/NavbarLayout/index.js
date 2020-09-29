@@ -1,10 +1,11 @@
 import React from "react";
-import { Navbar, Icon, Dropdown, Divider } from "react-materialize";
+import { Navbar, Icon, Dropdown } from "react-materialize";
 
 const navbar = (props) => {
   const { isProtected, logoutHandler, getUserProfile } = props;
   return (
     <Navbar
+      centerChildren
       alignLinks="right"
       brand={
         <a className="brand-logo" href="/">

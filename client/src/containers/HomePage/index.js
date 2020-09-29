@@ -4,18 +4,11 @@ import axios from "axios";
 import M from "materialize-css";
 
 import { getPost } from "../../actions";
-import { HomePage } from "../../components";
+import { Homepage } from "../../components";
 
 class index extends Component {
-  componentDidMount = async () => {
-    try {
-      const posts = await axios.get("/posts", {
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
-      });
-      this.props.posts(posts.data);
-    } catch (error) {
-      M.toast({ html: error });
-    }
+  componentDidMount = () => {
+    this.getPosts();
   };
 
   likePost = async (postId) => {
@@ -27,14 +20,18 @@ class index extends Component {
           headers: { authorization: "Bearer " + localStorage.getItem("token") },
         }
       );
-      const newData = this.props.allPost.map((item) => {
-        if (item._id === likes._id) {
-          return likes;
-        } else {
-          return item;
-        }
-      });
-      this.props.posts(newData);
+      // const newData = this.props.allPost.map((item) => {
+      //   console.log(likes);
+      //   if (item._id === likes.data.likes._id) {
+      //     return likes;
+      //   } else {
+      //     return item;
+      //   }
+      // });
+      // console.log(newData);
+
+      // this.props.posts(newData);
+      this.getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -49,14 +46,15 @@ class index extends Component {
           headers: { authorization: "Bearer " + localStorage.getItem("token") },
         }
       );
-      const newData = this.props.allPost.map((item) => {
-        if (item._id === likes._id) {
-          return likes;
-        } else {
-          return item;
-        }
-      });
-      this.props.posts(newData);
+      // const newData = this.props.allPost.map((item) => {
+      //   if (item._id === likes._id) {
+      //     return likes;
+      //   } else {
+      //     return item;
+      //   }
+      // });
+      // this.props.posts(newData);
+      this.getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -71,14 +69,15 @@ class index extends Component {
           headers: { authorization: "Bearer " + localStorage.getItem("token") },
         }
       );
-      const newData = this.props.allPost.map((item) => {
-        if (item._id === comments._id) {
-          return comments;
-        } else {
-          return item;
-        }
-      });
-      this.props.posts(newData);
+      // const newData = this.props.allPost.map((item) => {
+      //   if (item._id === comments._id) {
+      //     return comments;
+      //   } else {
+      //     return item;
+      //   }
+      // });
+      // this.props.posts(newData);
+      this.getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -99,10 +98,23 @@ class index extends Component {
     }
   };
 
+  getPosts = async () => {
+    try {
+      const posts = await axios.get("/posts", {
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      if (posts) {
+        this.props.posts(posts.data.reverse());
+      }
+    } catch (error) {
+      M.toast({ html: error });
+    }
+  };
+
   render() {
     return (
       <div>
-        <HomePage
+        <Homepage
           posts={this.props.allPost}
           like={this.likePost}
           unlike={this.unlikePost}
