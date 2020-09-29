@@ -11,6 +11,7 @@ class Authentication extends Component {
   state = {
     error: "",
     signupFormData: {
+      display: false,
       firstName: "",
       lastName: "",
       email: "",
@@ -58,17 +59,45 @@ class Authentication extends Component {
         });
 
         if (data) {
-          M.toast({ html: data.data.message });
+          M.toast({ html: "Account successfully created!" });
           this.clearFields();
           history.push(WEB_URL.HOMEPAGE);
-          console.log(data);
         }
       } else {
-        M.toast({ html: "Password did not match!" });
+        this.setState({
+          error: "Password did not match!",
+        });
       }
     } catch (error) {
-      M.toast({ html: error.response.data.error });
-      console.log("Error:", error.response.data);
+      this.setState({
+        error: error.response.data.error,
+      });
+      console.log("Signup-error:", error.response.data);
+    }
+  };
+
+  loginSubmitHandler = async (e) => {
+    e.preventDefault();
+
+    const { loginFormData } = this.state;
+    const { history } = this.props;
+
+    try {
+      const response = await axios.post("/login/api/v1", {
+        email: loginFormData.loginEmail,
+        password: loginFormData.loginPassword,
+      });
+
+      localStorage.setItem("User", JSON.stringify(response.data));
+
+      this.props.login(response.data);
+
+      history.push(WEB_URL.HOMEPAGE);
+    } catch (error) {
+      this.setState({
+        error: error.response.data,
+      });
+      console.log("Login-error:", error.response.data);
     }
   };
 
@@ -85,30 +114,26 @@ class Authentication extends Component {
     console.log("Fields cleared");
   };
 
-  loginSubmitHandler = async (e) => {
+  createAccount = (e) => {
     e.preventDefault();
 
-    const { loginFormData } = this.state;
-    const { history } = this.props;
+    const { signupFormData } = this.state;
+    this.setState({
+      signupFormData: { ...signupFormData, display: true },
+    });
+  };
 
-    try {
-      const response = await axios.post("/login/api/v1", {
-        email: loginFormData.loginEmail,
-        password: loginFormData.loginPassword,
-      });
+  showLoginForm = (e) => {
+    e.preventDefault();
 
-      localStorage.setItem("id", response.data._id);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("firstName", response.data.firstName);
+    const { signupFormData } = this.state;
+    this.setState({
+      signupFormData: { ...signupFormData, display: false },
+    });
+  };
 
-      this.props.login(response.data);
-
-      history.push(WEB_URL.HOMEPAGE);
-    } catch (error) {
-      M.toast({ html: error.response.data });
-      console.log("Error:", error.response.data);
-      // this.setState({ error: error.response.data });
-    }
+  resetPassword = (e) => {
+    e.preventDefault();
   };
 
   render() {
@@ -128,6 +153,9 @@ class Authentication extends Component {
         confirmPasswordRef={this.confirmPasswordRef}
         loginEmailRef={this.loginEmailRef}
         loginPasswordRef={this.loginPasswordRef}
+        createAccount={this.createAccount}
+        resetPassword={this.resetPassword}
+        showLogin={this.showLoginForm}
       />
     );
   }
