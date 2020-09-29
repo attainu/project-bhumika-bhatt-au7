@@ -19,20 +19,20 @@ const Homepage = (props) => {
     <Container>
       <Container className={style.background}>
         <CreatePost />
-        {/* <div className="home" style={{ margin: "26px auto" }}> */}
         {!props.posts ? (
           <Row>
-            <Col s={12}>
+            <Col s={10} offset="s1">
               <ProgressBar />
             </Col>
           </Row>
         ) : (
           _.map(props.posts, (post, idx) => {
             return (
-              <div className="card home-card" className={style.Home} key={idx}>
+              <div className={style.Home} key={idx}>
                 <h5>
                   {post.postedBy.firstName + " " + post.postedBy.lastName}
-                  {post.postedBy._id === localStorage.getItem("id") && (
+                  {post.postedBy._id ===
+                    JSON.parse(localStorage.getItem("User"))._id && (
                     <i
                       className="material-icons"
                       style={{ float: "right", cursor: "pointer" }}

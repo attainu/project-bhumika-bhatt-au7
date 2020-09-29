@@ -78,7 +78,10 @@ class createPost extends Component {
         "posts/createPost",
         { description: formdata.description },
         {
-          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+          headers: {
+            authorization:
+              "Bearer " + JSON.parse(localStorage.getItem("User")).token,
+          },
         }
       );
 
@@ -97,7 +100,10 @@ class createPost extends Component {
   getPosts = async () => {
     try {
       const posts = await axios.get("/posts", {
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        headers: {
+          authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("User")).token,
+        },
       });
       if (posts) {
         this.props.posts(posts.data.reverse());
