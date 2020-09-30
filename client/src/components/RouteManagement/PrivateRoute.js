@@ -6,7 +6,9 @@ import { Navbar } from "../../containers";
 
 const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
-  const isAuth = JSON.parse(localStorage.getItem("User"));
+  const isAuth = JSON.parse(localStorage.getItem("User"))
+    ? JSON.parse(localStorage.getItem("User")).token
+    : false;
   const history = useHistory();
 
   return (

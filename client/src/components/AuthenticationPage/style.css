@@ -2,15 +2,13 @@ body {
   background-color: rgb(240, 240, 240);
 }
 
-.test {
+.background {
   display: flex;
   align-items: center;
-  /* border-style: solid; */
-  border-color: black;
   height: 90vh;
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 992px) {
   .brand {
     text-align: center;
     font-style: inherit;
@@ -21,11 +19,20 @@ body {
   }
 }
 
-@media screen and (min-width: 1150px) {
+@media screen and (min-width: 993px) {
   .brand {
     text-align: center;
     font-style: inherit;
     font-size: 80px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    text-shadow: 5px 5px 5px gray;
+  }
+
+  .brand2 {
+    text-align: center;
+    font-style: inherit;
+    font-size: 60px;
     font-weight: 500;
     margin-bottom: 10px;
     text-shadow: 5px 5px 5px gray;
@@ -65,7 +72,7 @@ body {
 }
 
 .error {
-  color: red;
+  color: #c62828;
   margin-left: 5%;
 }
 
@@ -77,4 +84,14 @@ body {
 .showLogin {
   margin-left: 5%;
   margin-top: 3%;
+}
+
+/* label focus color */
+.input-field :focus + label {
+  color: #9c27b0 !important;
+}
+/* label underline focus color */
+.input-field :focus {
+  border-bottom: 1px solid #9c27b0 !important;
+  box-shadow: 0 1px 0 0 #9c27b0 !important;
 }

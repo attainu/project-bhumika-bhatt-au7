@@ -5,12 +5,14 @@ import { WEB_URL } from "../../configs";
 
 const PublicRoute = (props) => {
   const { component: Component, ...rest } = props;
-  const user = JSON.parse(localStorage.getItem("User"));
+  const isAuth = JSON.parse(localStorage.getItem("User"))
+    ? JSON.parse(localStorage.getItem("User")).token
+    : false;
 
   return (
     <Route
       render={(routeProps) => {
-        return user ? (
+        return isAuth ? (
           <Redirect to={WEB_URL.HOMEPAGE} />
         ) : (
           <Component {...rest} {...routeProps} />

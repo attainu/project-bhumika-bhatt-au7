@@ -5,7 +5,7 @@ import "./style.css";
 
 const Sidenav = (props) => {
   const { showProfile, showSettings, logoutHandler, search } = props;
-  const userName = JSON.parse(localStorage.getItem("User")).userName;
+  const userName = JSON.parse(localStorage.getItem("User")).user.userName;
 
   return (
     <div>

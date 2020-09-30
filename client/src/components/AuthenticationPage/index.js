@@ -1,7 +1,7 @@
 import React from "react";
 import { TextInput, Button, Container, Row, Col } from "react-materialize";
 
-import style from "./AuthenticationPage.module.css";
+import "./style.css";
 
 const AuthenticationPage = (props) => {
   const {
@@ -32,16 +32,16 @@ const AuthenticationPage = (props) => {
 
   return (
     <Container>
-      <Row className={style.test}>
+      <Row className="background">
         {display ? (
           <Col s={12} m={8} l={6} offset="m2 l3">
-            <div className={style.brandMobile}>
-              <span className="hide-on-large-only">connectX</span>
+            <div className="hide-on-large-only brandMobile">
+              <span>connectX</span>
             </div>
-            <div className={style.brand}>
-              <span className="hide-on-med-and-down">connectX</span>
+            <div className="hide-on-med-and-down brand2">
+              <span>connectX</span>
             </div>
-            <form className={style.signup} onSubmit={submitHandler}>
+            <form className="signup" onSubmit={submitHandler}>
               <Col s={12}>
                 <TextInput
                   id="firstName"
@@ -106,13 +106,13 @@ const AuthenticationPage = (props) => {
                   m={6}
                 />
               </Col>
-              <div className={style.error}>
+              <div className="error">
                 <span>{error}</span>
               </div>
-              <Button waves="green" className={style.button}>
+              <Button waves="purple" className="button purple darken-2">
                 Create account
               </Button>
-              <div className={style.showLogin}>
+              <div className="showLogin">
                 Already have an account?{" "}
                 <a href="#" onClick={showLogin}>
                   Login
@@ -122,16 +122,16 @@ const AuthenticationPage = (props) => {
           </Col>
         ) : (
           [
-            <Col key={0} className="hide-on-med-and-down" m={6}>
-              <div className={style.brand}>
+            <Col className="hide-on-med-and-down brand" key={0} m={6}>
+              <div>
                 <span>connectX</span>
               </div>
             </Col>,
             <Col key={1} s={12} m={6} l={5} offset="m3 l1">
-              <div className={style.brandMobile}>
-                <span className="hide-on-large-only">connectX</span>
+              <div className="hide-on-large-only brandMobile">
+                <span>connectX</span>
               </div>
-              <form className={style.login} onSubmit={loginSubmitHandler}>
+              <form className="login" onSubmit={loginSubmitHandler}>
                 <TextInput
                   type="email"
                   id="email"
@@ -155,20 +155,20 @@ const AuthenticationPage = (props) => {
                   required
                   s={12}
                 />
-                <div className={style.link}>
+                <div className="link">
                   <a href="#" onClick={resetPassword}>
                     Forgot password?
                   </a>
                 </div>
-                <div className={style.error}>
+                <div className="error">
                   <span>{error}</span>
                 </div>
-                <Button waves="green" className={style.button}>
+                <Button waves="purple" className="button purple darken-2">
                   Login
                 </Button>
                 <Button
-                  waves="green"
-                  className={style.button}
+                  waves="purple"
+                  className="button purple darken-2"
                   onClick={createAccount}
                 >
                   Create account

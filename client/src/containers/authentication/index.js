@@ -103,6 +103,7 @@ class Authentication extends Component {
 
   clearFields = () => {
     this.setState({
+      error: "",
       signupFormData: {
         firstName: "",
         lastName: "",
@@ -119,6 +120,7 @@ class Authentication extends Component {
 
     const { signupFormData } = this.state;
     this.setState({
+      error: "",
       signupFormData: { ...signupFormData, display: true },
     });
   };
@@ -128,6 +130,7 @@ class Authentication extends Component {
 
     const { signupFormData } = this.state;
     this.setState({
+      error: "",
       signupFormData: { ...signupFormData, display: false },
     });
   };
