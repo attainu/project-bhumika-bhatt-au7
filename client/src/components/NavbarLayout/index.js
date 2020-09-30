@@ -15,6 +15,7 @@ const navbar = (props) => {
   const user = JSON.parse(localStorage.getItem("User"));
   return (
     <Navbar
+      centerChildren
       alignLinks="right"
       brand={
         <a href="/" className="brand-logo" onClick={showHomepage}>
@@ -38,11 +39,11 @@ const navbar = (props) => {
       className="purple darken-3"
       sidenav={
         <Sidenav
-          logoutHandler={this.logoutHandler}
-          showHomepage={this.showHomepage}
-          showSettings={this.showSettings}
-          showProfile={this.showProfile}
-          search={this.search}
+          logoutHandler={logoutHandler}
+          showHomepage={showHomepage}
+          showSettings={showSettings}
+          showProfile={showProfile}
+          search={search}
         />
       }
     >

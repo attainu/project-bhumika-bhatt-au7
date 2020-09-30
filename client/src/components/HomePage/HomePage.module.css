@@ -2,9 +2,27 @@
   max-width: 550px;
   height: max-content;
   margin: 10px auto;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: lightgray;
+  padding: 5px;
 }
 
-.Image img {
-  width: 500px;
-  height: 500px;
+.Image {
+  max-height: fit-content;
+  min-height: 250px;
+  background-color: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 50px;
+  word-wrap: break-word;
+  margin-left: -5px;
+  margin-right: -5px;
+  margin-bottom: 5px;
+}
+
+.background {
+  height: fit-content;
+  padding-top: 10px;
 }
