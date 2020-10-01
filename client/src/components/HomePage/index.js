@@ -1,39 +1,40 @@
 import React from "react";
-import {
-  Container,
-  Row,
-  Button,
-  Col,
-  ProgressBar,
-  TextInput,
-} from "react-materialize";
+import { Container, Row, Col, ProgressBar, TextInput } from "react-materialize";
 import _ from "lodash";
 
-import style from "./HomePage.module.css";
+import "./style.css";
 import { CreatePost } from "../../containers";
 
 const Homepage = (props) => {
-  const userId = localStorage.getItem("id");
+  const { _id } = JSON.parse(localStorage.getItem("User"));
 
   return (
     <Container>
-      <Container className={style.background}>
+      <Container className="">
         <CreatePost />
         {!props.posts ? (
           <Row>
             <Col s={10} offset="s1">
-              <ProgressBar />
+              <ProgressBar className="purple" />
             </Col>
           </Row>
         ) : (
           _.map(props.posts, (post, idx) => {
             return (
-              <div className={style.Home} key={idx}>
-                <h5>
-                  {post.postedBy.firstName + " " + post.postedBy.lastName}
+              <div className="posts2" key={idx}>
+                <div className="dp2">
+                  <img
+                    id="dp3"
+                    src="https://www.w3schools.com/w3images/avatar2.png"
+                    alt={post.postedBy.userName}
+                  ></img>
+                  <span>
+                    @{post.postedBy.firstName + " " + post.postedBy.lastName}
+                  </span>
                   {post.postedBy._id ===
                     JSON.parse(localStorage.getItem("User"))._id && (
                     <i
+                      id="delete"
                       className="material-icons"
                       style={{ float: "right", cursor: "pointer" }}
                       onClick={() => props.delete(post._id)}
@@ -41,18 +42,18 @@ const Homepage = (props) => {
                       delete
                     </i>
                   )}
-                </h5>
-
-                <div className="card-image" className={style.Image}>
-                  {post.photo ? (
-                    <img src={post.photo} alt="img" />
-                  ) : (
-                    post.description
-                  )}
+                </div>
+                <div className="post2">
+                  <img
+                    id="postImg"
+                    src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                    alt="img"
+                  />
+                  <h5>{post.description}</h5>
                 </div>
 
-                <div className="card-content">
-                  {post.likes.includes(userId) ? (
+                <div className="">
+                  {post.likes.includes(_id) ? (
                     <i
                       className="material-icons"
                       onClick={() => {

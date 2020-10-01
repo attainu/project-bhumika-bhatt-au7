@@ -1,7 +1,7 @@
 import React from "react";
 import { Textarea, Row, Button, Col } from "react-materialize";
 
-import style from "./CreatePostLayout.module.css";
+import "./style.css";
 
 const CreatePostLayout = (props) => {
   const {
@@ -13,7 +13,7 @@ const CreatePostLayout = (props) => {
   } = props;
 
   return (
-    <div className={style.Home}>
+    <div className="createPostContainer">
       <Row>
         <Textarea
           id="createPost"
@@ -23,19 +23,25 @@ const CreatePostLayout = (props) => {
           onChange={inputHandler}
           s={12}
         />
-        <Col offset="s5 m6">
-          <Button
-            style={{ marginRight: "5px" }}
-            small
-            waves="teal"
-            onClick={chooseFile}
-          >
-            Choose file
-          </Button>
-          <Button type="submit" small onClick={submitHandler} waves="teal">
-            Post
-          </Button>
-        </Col>
+
+        <Button
+          id="post"
+          small
+          waves="purple"
+          className="botton3 purple darken-2"
+          onClick={submitHandler}
+        >
+          Post
+        </Button>
+        <Button
+          small
+          id="chooseFile"
+          waves="purple"
+          className="botton3 purple darken-2"
+          onClick={chooseFile}
+        >
+          Choose file
+        </Button>
       </Row>
     </div>
   );

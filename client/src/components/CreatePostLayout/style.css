@@ -1,0 +1,16 @@
+.createPostContainer {
+  border: 1px solid;
+  margin: 20px 50px 20px 50px;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0 0 5px 2px gray;
+}
+
+.botton3 {
+  float: right;
+}
+
+#post {
+  margin-right: 20px;
+  margin-left: 5px;
+}
