@@ -83,8 +83,7 @@ const navbar = (props) => {
         <a href="/settings#" onClick={showSettings}>
           Settings
         </a>
-        <Divider />
-        <a href="/#" onClick={logoutHandler}>
+        <a id="logout" href="/#" onClick={logoutHandler}>
           Logout
         </a>
       </Dropdown>

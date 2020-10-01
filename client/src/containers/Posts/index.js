@@ -31,9 +31,10 @@ class Posts extends Component {
   };
 
   render() {
+    const { userName } = JSON.parse(localStorage.getItem("User"));
     return (
       <div>
-        <ProfilePage posts={this.props.myPosts} userName={this.props.user} />
+        <ProfilePage userName={userName} />
       </div>
     );
   }

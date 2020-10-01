@@ -69,3 +69,7 @@
 .dropdown-content li:hover {
   background-color: transparent;
 }
+
+#logout {
+  border-top: 1px solid white;
+}
