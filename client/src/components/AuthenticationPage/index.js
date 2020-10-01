@@ -114,7 +114,7 @@ const AuthenticationPage = (props) => {
               </Button>
               <div className="showLogin">
                 Already have an account?{" "}
-                <a href="#" onClick={showLogin}>
+                <a href="/#" onClick={showLogin}>
                   Login
                 </a>
               </div>
@@ -156,7 +156,7 @@ const AuthenticationPage = (props) => {
                   s={12}
                 />
                 <div className="link">
-                  <a href="#" onClick={resetPassword}>
+                  <a href="/#" onClick={resetPassword}>
                     Forgot password?
                   </a>
                 </div>

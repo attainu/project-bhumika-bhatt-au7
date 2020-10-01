@@ -1,4 +1,4 @@
-import { GET_POST, GET_MY_POST, ADD_POST } from "../configs/actionTypes";
+import { GET_POST, GET_MY_POST } from "../configs/actionTypes";
 
 const initialState = {
   posts: [],

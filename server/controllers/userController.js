@@ -10,12 +10,23 @@ const userController = {
       if (user) {
         if (await comparePassword(req.body.password, user.password)) {
           const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
-          res.status(200).send({ token, user });
+          const { _id, firstName, lastName, userName, country, mobile } = user;
+          res
+            .status(200)
+            .send({
+              token,
+              _id,
+              firstName,
+              lastName,
+              userName,
+              country,
+              mobile,
+            });
         } else {
           res.status(400).send("Incorrect password!");
         }
       } else {
-        res.status(404).send("User not found! Create a new account");
+        res.status(404).send("User not found! Create new account");
       }
     } catch (error) {
       console.log(error);
@@ -26,7 +37,7 @@ const userController = {
   signup: async (req, res) => {
     try {
       const user = await User.signup(req.body);
-      return res.status(200).json({ message: "User created successfully!" });
+      return res.status(200).json({ message: "user created successfully!" });
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);

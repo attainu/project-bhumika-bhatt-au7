@@ -12,7 +12,7 @@ const navbar = (props) => {
     logoutHandler,
     search,
   } = props;
-  const user = JSON.parse(localStorage.getItem("User")).user;
+  const user = JSON.parse(localStorage.getItem("User"));
   return (
     <Navbar
       centerChildren
@@ -22,7 +22,6 @@ const navbar = (props) => {
           connectX
         </a>
       }
-      centerChildren
       id="mobile-nav"
       menuIcon={<Icon>menu</Icon>}
       options={{
