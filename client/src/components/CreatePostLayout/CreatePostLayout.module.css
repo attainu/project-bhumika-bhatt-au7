@@ -1,0 +1,13 @@
+.chooseFile {
+  margin-top: -50px;
+  margin-right: 5px;
+}
+
+.Home {
+  max-width: 550px;
+  height: max-content;
+  margin: auto;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: lightgray;
+}
