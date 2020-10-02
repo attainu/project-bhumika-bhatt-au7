@@ -1,2 +1,2 @@
 export * from "./loginAction";
-export { getPost, getMyPost } from "./postAction";
+export * from "./postAction";

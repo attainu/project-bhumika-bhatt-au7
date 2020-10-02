@@ -10,13 +10,23 @@ const userController = {
       if (user) {
         if (await comparePassword(req.body.password, user.password)) {
           const token = jwt.sign({ _id: user._id }, process.env.SECRET_KEY);
-          const { _id, firstName } = user;
-          res.status(200).send({ token, firstName, _id });
+          const { _id, firstName, lastName, userName, country, mobile } = user;
+          res
+            .status(200)
+            .send({
+              token,
+              _id,
+              firstName,
+              lastName,
+              userName,
+              country,
+              mobile,
+            });
         } else {
-          res.status(400).send("Password did not match!");
+          res.status(400).send("Incorrect password!");
         }
       } else {
-        res.status(404).send("User not found! Please signup first...");
+        res.status(404).send("User not found! Create new account");
       }
     } catch (error) {
       console.log(error);

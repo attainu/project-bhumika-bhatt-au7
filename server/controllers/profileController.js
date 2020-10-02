@@ -37,7 +37,7 @@ const profileController = {
     console.log("Profile", req.body);
     try {
       const info = await Profile.updateUser(req.body);
-      res.status(200).send("user details updated successfully!");
+      res.status(200).send("User details updated successfully!");
     } catch (error) {
       console.log(error);
       res.status(400).send(error._message);
@@ -47,7 +47,7 @@ const profileController = {
   updateUserPassword: async (req, res) => {
     try {
       const info = await Profile.updateUserPassword(req.body);
-      res.status(200).send("user password updated successfully!");
+      res.status(200).send("User password updated successfully!");
     } catch (error) {
       console.log(error);
       res.status(400).send(error._message);

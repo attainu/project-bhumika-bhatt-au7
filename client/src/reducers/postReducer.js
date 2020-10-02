@@ -1,8 +1,8 @@
 import { GET_POST, GET_MY_POST } from "../configs/actionTypes";
 
 const initialState = {
-  posts: null,
-  myPost: null,
+  posts: [],
+  myPost: [],
 };
 
 const reducer = (state = initialState, action) => {

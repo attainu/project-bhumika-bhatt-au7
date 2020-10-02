@@ -6,7 +6,9 @@ import { Navbar } from "../../containers";
 
 const PrivateRoute = (props) => {
   const { component: Component, ...rest } = props;
-  const isAuth = localStorage.getItem("token");
+  const isAuth = JSON.parse(localStorage.getItem("User"))
+    ? JSON.parse(localStorage.getItem("User")).token
+    : false;
   const history = useHistory();
 
   return (
@@ -14,7 +16,7 @@ const PrivateRoute = (props) => {
       render={(routeProps) => {
         return isAuth ? (
           [
-            <Navbar isProtected key={0} history={history} />,
+            <Navbar history={history} key={0} />,
             <Component {...rest} {...routeProps} key={1} />,
           ]
         ) : (

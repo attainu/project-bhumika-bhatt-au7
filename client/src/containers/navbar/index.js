@@ -1,21 +1,8 @@
 import React, { Component } from "react";
-import axios from "axios";
 
 import { NavbarLayout } from "../../components";
 
 class Navbar extends Component {
-  state = {
-    isProtected: this.props.isProtected,
-    user: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      mobile: "",
-      userName: "",
-      country: "",
-    },
-  };
-
   logoutHandler = (e) => {
     e.preventDefault();
 
@@ -24,43 +11,37 @@ class Navbar extends Component {
     history.push("/");
   };
 
-  getUserProfile = async (e) => {
+  search = (e) => {
+    e.preventDefault();
+  };
+
+  showHomepage = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.get(
-        `profile/api/v2/${localStorage.getItem("id")}`
-      );
+    const { history } = this.props;
+    history.push("/");
+  };
+  showProfile = (e) => {
+    e.preventDefault();
 
-      const { history } = this.props;
+    const { history } = this.props;
+    history.push("/profile");
+  };
+  showSettings = (e) => {
+    e.preventDefault();
 
-      if (response) {
-        this.setState({
-          user: {
-            firstName: response.data.firstName,
-            lastName: response.data.lastName,
-            email: response.data.email,
-            mobile: response.data.mobile,
-            userName: response.data.userName,
-            country: response.data.country,
-          },
-        });
-
-        localStorage.setItem("User", JSON.stringify(response.data));
-        history.push("/settings");
-      }
-    } catch (error) {
-      console.log(error.response);
-    }
+    const { history } = this.props;
+    history.push("/settings");
   };
 
   render() {
-    const { isProtected } = this.state;
     return (
       <NavbarLayout
-        isProtected={isProtected}
         logoutHandler={this.logoutHandler}
-        getUserProfile={this.getUserProfile}
+        showHomepage={this.showHomepage}
+        showSettings={this.showSettings}
+        showProfile={this.showProfile}
+        search={this.search}
       />
     );
   }

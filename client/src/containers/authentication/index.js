@@ -11,6 +11,7 @@ class Authentication extends Component {
   state = {
     error: "",
     signupFormData: {
+      display: false,
       firstName: "",
       lastName: "",
       email: "",
@@ -58,31 +59,21 @@ class Authentication extends Component {
         });
 
         if (data) {
-          M.toast({ html: data.data.message });
+          M.toast({ html: "Account successfully created!" });
           this.clearFields();
           history.push(WEB_URL.HOMEPAGE);
-          console.log(data);
         }
       } else {
-        M.toast({ html: "Password did not match!" });
+        this.setState({
+          error: "Password did not match!",
+        });
       }
     } catch (error) {
-      M.toast({ html: error.response.data.error });
-      console.log("Error:", error.response.data);
+      this.setState({
+        error: error.response.data.error,
+      });
+      console.log("Signup-error:", error.response.data);
     }
-  };
-
-  clearFields = () => {
-    this.setState({
-      signupFormData: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-      },
-    });
-    console.log("Fields cleared");
   };
 
   loginSubmitHandler = async (e) => {
@@ -97,18 +88,55 @@ class Authentication extends Component {
         password: loginFormData.loginPassword,
       });
 
-      localStorage.setItem("id", response.data._id);
-      localStorage.setItem("token", response.data.token);
-      localStorage.setItem("firstName", response.data.firstName);
+      localStorage.setItem("User", JSON.stringify(response.data));
 
       this.props.login(response.data);
 
       history.push(WEB_URL.HOMEPAGE);
     } catch (error) {
-      M.toast({ html: error.response.data });
-      console.log("Error:", error.response.data);
-      // this.setState({ error: error.response.data });
+      this.setState({
+        error: error.response.data,
+      });
+      console.log("Login-error:", error.response.data);
     }
+  };
+
+  clearFields = () => {
+    this.setState({
+      error: "",
+      signupFormData: {
+        firstName: "",
+        lastName: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+      },
+    });
+    console.log("Fields cleared");
+  };
+
+  createAccount = (e) => {
+    e.preventDefault();
+
+    const { signupFormData } = this.state;
+    this.setState({
+      error: "",
+      signupFormData: { ...signupFormData, display: true },
+    });
+  };
+
+  showLoginForm = (e) => {
+    e.preventDefault();
+
+    const { signupFormData } = this.state;
+    this.setState({
+      error: "",
+      signupFormData: { ...signupFormData, display: false },
+    });
+  };
+
+  resetPassword = (e) => {
+    e.preventDefault();
   };
 
   render() {
@@ -128,6 +156,9 @@ class Authentication extends Component {
         confirmPasswordRef={this.confirmPasswordRef}
         loginEmailRef={this.loginEmailRef}
         loginPasswordRef={this.loginPasswordRef}
+        createAccount={this.createAccount}
+        resetPassword={this.resetPassword}
+        showLogin={this.showLoginForm}
       />
     );
   }
