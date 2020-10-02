@@ -7,18 +7,19 @@ class OtherUser {
       userSchema
         .findOne({ _id: id })
         .select("-password")
-        .exec((err, info) => {
+        .exec((err, info1) => {
           if (err) {
+            console.log(err);
             rej(err);
           } else {
             postSchema
               .find({ postedBy: id })
               .populate("postedBy", "_id userName")
-              .exec((err, info) => {
+              .exec((err, info2) => {
                 if (err) {
                   rej(err);
                 } else {
-                  res(info);
+                  res(info1, info2);
                 }
               });
           }

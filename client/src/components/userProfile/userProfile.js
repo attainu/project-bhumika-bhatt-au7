@@ -1,51 +1,54 @@
 import React from "react";
+import { Row, Col, ProgressBar } from "react-materialize";
 
-import classes from "./ProfilePage.module.css";
+import "./style.css";
 
 const userProfile = (props) => {
-  console.log(props);
+  const { posts } = props;
   return (
-    <div className={classes.Container}>
-      <div className={classes.ProfileDes}>
-        <div className={classes.Image}>
-          <img
-            src="https://images.unsplash.com/photo-1479936343636-73cdc5aae0c3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"
-            alt="profile"
-          />
-        </div>
-        <div>
-          <h4>userName</h4>
-          <div className={classes.Data}>
-            <h6> 40 Posts </h6>
-            <h6> 40 Followers </h6>
-            <h6> 40 Following </h6>
+    <Row>
+      {!props.user ? (
+        <Col s={10} offset="s1">
+          <ProgressBar className="purple" />
+        </Col>
+      ) : (
+        <Col s={12} m={8} l={6} offset="m2 l3">
+          <div className="dp">
+            <img
+              id="dp2"
+              src="https://www.w3schools.com/w3images/avatar2.png"
+              alt={props.user.userName}
+            ></img>
+            <span>@{props.user.userName}</span>
           </div>
-          {/* <button
-            className="btn waves-effect waves-light blue darker larger"
-            onClick={() => props.follow()}
-          >
-            Follow
-          </button> */}
-        </div>
-      </div>
-      );
-      <div className={classes.Gallery}>
-        {!props.posts ? (
-          <h3>Loading....</h3>
-        ) : (
-          props.posts.map((item) => {
-            return (
-              <img
-                className={classes.Item}
-                src={item.photo}
-                alt={item.title}
-                key={item._id}
-              />
-            );
-          })
-        )}
-      </div>
-    </div>
+          <div className="userConnection">
+            {posts || 0} Posts || {props.user.followers.length} Followers ||{" "}
+            {props.user.following.length} Following
+          </div>
+          <Row>
+            <div className="posts center-align">
+              <Col>
+                <img
+                  className="post3"
+                  src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                  alt={props.user.userName}
+                ></img>
+                <img
+                  className="post3"
+                  src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                  alt={props.user.userName}
+                ></img>
+                <img
+                  className="post3"
+                  src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
+                  alt={props.user.userName}
+                ></img>
+              </Col>
+            </div>
+          </Row>
+        </Col>
+      )}
+    </Row>
   );
 };
 

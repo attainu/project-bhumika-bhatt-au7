@@ -1,23 +1,27 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { connect } from "react-redux";
-import M from "materialize-css";
 
-import { getMyPost } from "../../actions";
 import { UserProfilePage } from "../../components";
 
 class UserProfile extends Component {
-  // componentDidMount = async () => {
-  //   try {
-  //     const myPost = await axios.get("posts/myPost", {
-  //       headers: { authorization: "Bearer " + localStorage.getItem("token") },
-  //     });
-  //     console.log(myPost);
-  //     this.props.myPost(myPost.data);
-  //   } catch (error) {
-  //     M.toast({ html: error.response.data });
-  //   }
-  // };
+  state = {
+    userPosts: null,
+  };
+  componentDidMount = async () => {
+    this.getUser();
+  };
+
+  getUser = async () => {
+    const { userId } = this.props.computedMatch.params;
+    try {
+      const userPost = await axios.get(`http://localhost:3000/user/${userId}`, {
+        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+      });
+      this.setState({ userPosts: userPost.data });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   // followUser = async () => {
   //   try {
@@ -36,25 +40,13 @@ class UserProfile extends Component {
     return (
       <div>
         <UserProfilePage
-        // posts={this.props.myPosts}
-        // userName={this.props.user}
-        // follow={this.followUser}
+          // posts={this.state.userPosts.posts}
+          user={this.state.userPosts}
+          // follow={this.followUser}
         />
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    myPosts: state.post.myPost,
-  };
-};
-
-const dispatchMapToProps = (dispatch) => {
-  return {
-    myPost: (myPost) => dispatch(getMyPost(myPost)),
-  };
-};
-
-export default connect(mapStateToProps, dispatchMapToProps)(UserProfile);
+export default UserProfile;

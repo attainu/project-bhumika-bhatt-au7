@@ -40,15 +40,7 @@ class Posts extends Component {
     const { userName } = JSON.parse(localStorage.getItem("User"));
     return (
       <div>
-<<<<<<< HEAD
-        <ProfilePage
-          posts={this.props.myPosts}
-          userName={this.props.user}
-          follow={this.followUser}
-        />
-=======
         <ProfilePage userName={userName} />
->>>>>>> 5dc3abfd05a7df0fab573c57e85bd977f761b2d7
       </div>
     );
   }
