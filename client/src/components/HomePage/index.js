@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Row, Col, ProgressBar, TextInput } from "react-materialize";
+import { Row, Col, ProgressBar, TextInput } from "react-materialize";
 import _ from "lodash";
 
 import "./style.css";
@@ -9,15 +9,13 @@ const Homepage = (props) => {
   const { _id } = JSON.parse(localStorage.getItem("User"));
 
   return (
-    <Container>
-      <Container className="">
+    <Row>
+      <Col s={12} m={8} l={4} offset="m2 l4">
         <CreatePost />
         {!props.posts ? (
-          <Row>
-            <Col s={10} offset="s1">
-              <ProgressBar className="purple" />
-            </Col>
-          </Row>
+          <Col s={10} offset="s1">
+            <ProgressBar className="purple" />
+          </Col>
         ) : (
           _.map(props.posts, (post, idx) => {
             return (
@@ -28,7 +26,7 @@ const Homepage = (props) => {
                     src="https://www.w3schools.com/w3images/avatar2.png"
                     alt={post.postedBy.userName}
                   ></img>
-                  <span>
+                  <span id="name">
                     @{post.postedBy.firstName + " " + post.postedBy.lastName}
                   </span>
                   {post.postedBy._id ===
@@ -36,7 +34,6 @@ const Homepage = (props) => {
                     <i
                       id="delete"
                       className="material-icons"
-                      style={{ float: "right", cursor: "pointer" }}
                       onClick={() => props.delete(post._id)}
                     >
                       delete
@@ -49,10 +46,9 @@ const Homepage = (props) => {
                     src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
                     alt="img"
                   />
-                  <h5>{post.description}</h5>
                 </div>
-
-                <div className="">
+                <div className="engagement">
+                  <h5>{post.description}</h5>
                   {post.likes.includes(_id) ? (
                     <i
                       className="material-icons"
@@ -76,8 +72,6 @@ const Homepage = (props) => {
                   )}
 
                   <h6>{post.likes.length} likes</h6>
-                  {/* <h6>{post.title}</h6> */}
-                  {post.photo && <p>{post.description}</p>}
                   {post.comments.map((comment) => {
                     return (
                       <h6 key={comment._id}>
@@ -102,6 +96,7 @@ const Homepage = (props) => {
                       id="addComment"
                       name="comment"
                       placeholder="Add comment"
+                      noLayout
                     />
                   </form>
                 </div>
@@ -109,10 +104,8 @@ const Homepage = (props) => {
             );
           })
         )}
-
-        {/* </div> */}
-      </Container>
-    </Container>
+      </Col>
+    </Row>
   );
 };
 

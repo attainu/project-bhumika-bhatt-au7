@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, CardTitle } from "react-materialize";
 
-import "./style.css";
+import "./style.scss";
 
 const Sidenav = (props) => {
   const { showProfile, showSettings, logoutHandler, search } = props;

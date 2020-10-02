@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Icon, Dropdown, Divider } from "react-materialize";
 
-import "./style.css";
+import "./style.scss";
 import Sidenav from "./sidenav";
 
 const navbar = (props) => {
@@ -15,6 +15,7 @@ const navbar = (props) => {
   const user = JSON.parse(localStorage.getItem("User"));
   return (
     <Navbar
+      fixed={window.innerWidth < 993}
       centerChildren
       alignLinks="right"
       brand={
@@ -35,7 +36,7 @@ const navbar = (props) => {
         outDuration: 200,
         preventScrolling: true,
       }}
-      className="purple darken-3"
+      className="purple darken-3 isFixed"
       sidenav={
         <Sidenav
           logoutHandler={logoutHandler}
