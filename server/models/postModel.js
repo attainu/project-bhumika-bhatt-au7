@@ -5,7 +5,7 @@ class Post {
     return new Promise(async (res, rej) => {
       postSchema
         .find()
-        .populate("postedBy", "_id firstName lastName")
+        .populate("postedBy", "_id firstName lastName userName")
         .populate("comments.postedBy", "_id firstName lastName")
         .populate("likes.postedBy", "_id firstName lastName")
         .exec((err, info) => {

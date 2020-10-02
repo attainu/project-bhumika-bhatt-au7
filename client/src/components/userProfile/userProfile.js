@@ -2,8 +2,7 @@ import React from "react";
 
 import classes from "./ProfilePage.module.css";
 
-const profilePage = (props) => {
-  console.log(props.posts);
+const userProfile = (props) => {
   console.log(props);
   return (
     <div className={classes.Container}>
@@ -21,12 +20,12 @@ const profilePage = (props) => {
             <h6> 40 Followers </h6>
             <h6> 40 Following </h6>
           </div>
-          <button
+          {/* <button
             className="btn waves-effect waves-light blue darker larger"
             onClick={() => props.follow()}
           >
             Follow
-          </button>
+          </button> */}
         </div>
       </div>
       );
@@ -50,4 +49,4 @@ const profilePage = (props) => {
   );
 };
 
-export default profilePage;
+export default userProfile;

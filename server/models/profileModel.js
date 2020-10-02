@@ -65,6 +65,68 @@ class Profile {
       );
     });
   };
+
+  updateUserFollowing = (followId, userId) => {
+    return new Promise(async (res, rej) => {
+      userSchema.findByIdAndUpdate(
+        followId,
+        {
+          $push: { followers: userId },
+        },
+        { new: true },
+        (err, info) => {
+          if (err) {
+            rej(err);
+          }
+          userSchema.findByIdAndUpdate(
+            userId,
+            {
+              $push: { following: followId },
+            },
+            { new: true },
+            (err, info) => {
+              if (err) {
+                rej(err);
+              } else {
+                res(info);
+              }
+            }
+          );
+        }
+      );
+    });
+  };
+
+  updateUserUnFollowing = (unfollowId, userId) => {
+    return new Promise(async (res, rej) => {
+      userSchema.findByIdAndUpdate(
+        followId,
+        {
+          $pull: { followers: userId },
+        },
+        { new: true },
+        (err, info) => {
+          if (err) {
+            rej(err);
+          }
+          userSchema.findByIdAndUpdate(
+            userId,
+            {
+              $pull: { following: unfollowId },
+            },
+            { new: true },
+            (err, info) => {
+              if (err) {
+                rej(err);
+              } else {
+                res(info);
+              }
+            }
+          );
+        }
+      );
+    });
+  };
 }
 
 export default new Profile();
