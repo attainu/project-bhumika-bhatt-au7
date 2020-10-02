@@ -35,6 +35,7 @@ const Homepage = (props) => {
                       id="delete"
                       className="material-icons"
                       onClick={() => props.delete(post._id)}
+                      style={{ userSelect: "none" }}
                     >
                       delete
                     </i>
@@ -55,7 +56,7 @@ const Homepage = (props) => {
                       onClick={() => {
                         props.unlike(post._id);
                       }}
-                      style={{ cursor: "pointer" }}
+                      style={{ cursor: "pointer", userSelect: "none" }}
                     >
                       thumb_down
                     </i>
@@ -65,7 +66,10 @@ const Homepage = (props) => {
                       onClick={() => {
                         props.like(post._id);
                       }}
-                      style={{ cursor: "pointer" }}
+                      style={{
+                        cursor: "pointer",
+                        userSelect: "none",
+                      }}
                     >
                       thumb_up
                     </i>

@@ -88,6 +88,7 @@
   }
   .tabActive {
     width: 100%;
+    border: solid #4a148c;
   }
   .tab:hover {
     border: solid #4a148c;
