@@ -21,6 +21,12 @@ const profilePage = (props) => {
             <h6> 40 Followers </h6>
             <h6> 40 Following </h6>
           </div>
+          <button
+            className="btn waves-effect waves-light blue darker larger"
+            onClick={() => props.follow()}
+          >
+            Follow
+          </button>
         </div>
       </div>
       );

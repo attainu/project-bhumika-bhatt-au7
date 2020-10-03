@@ -4,4 +4,5 @@ export default {
   SETTINGS: "/settings",
   PROFILE: "/profile",
   CREATE: "/create",
+  USER_PROFILE: "/profile/:userId",
 };

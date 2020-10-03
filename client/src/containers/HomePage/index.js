@@ -7,9 +7,17 @@ import { getPost } from "../../actions";
 import { Homepage } from "../../components";
 
 class index extends Component {
+  state = {
+    renderPost: false,
+    likes: [],
+    posts: null,
+  };
+
   componentDidMount = () => {
     this.getPosts();
   };
+
+  componentDidUpdate = () => {};
 
   likePost = async (postId) => {
     try {
@@ -118,7 +126,9 @@ class index extends Component {
         },
       });
       if (posts) {
+        // this.setState({ posts: posts.data });
         this.props.posts(posts.data.reverse());
+        console.log(this.state.posts);
       }
     } catch (error) {
       M.toast({ html: error });
@@ -131,9 +141,12 @@ class index extends Component {
         <Homepage
           posts={this.props.allPost}
           like={this.likePost}
+          likes={this.state.likes}
           unlike={this.unlikePost}
           comment={this.commentingPost}
           delete={this.deletingPost}
+          renderPost={this.state.renderPost}
+          renderCreatePost={this.renderCreatePost}
         />
       </div>
     );

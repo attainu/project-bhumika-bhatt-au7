@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Row, Col, ProgressBar, TextInput } from "react-materialize";
 import _ from "lodash";
 
@@ -27,7 +28,16 @@ const Homepage = (props) => {
                     alt={post.postedBy.userName}
                   ></img>
                   <span id="name">
-                    {post.postedBy.firstName + " " + post.postedBy.lastName}
+                    <Link
+                      to={
+                        post.postedBy._id !==
+                        JSON.parse(localStorage.getItem("User"))._id
+                          ? `/profile/${post.postedBy._id}`
+                          : "/profile"
+                      }
+                    >
+                      {post.postedBy.firstName + " " + post.postedBy.lastName}
+                    </Link>
                   </span>
                   {post.postedBy._id ===
                     JSON.parse(localStorage.getItem("User"))._id && (

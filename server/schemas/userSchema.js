@@ -1,4 +1,5 @@
 import { model, Schema } from "mongoose";
+const { ObjectId } = Schema.Types;
 
 const userSchema = new Schema(
   {
@@ -63,6 +64,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    followers: [{ type: ObjectId, ref: "Users" }],
+    following: [{ type: ObjectId, ref: "Users" }],
   },
   { versionKey: false, timestamps: true }
 );

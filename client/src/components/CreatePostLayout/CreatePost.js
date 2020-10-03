@@ -49,7 +49,7 @@ const createPost = (props) => {
         </div>
       </div>
       <button
-        class="btn waves-effect waves-light blue darker larger"
+        className="btn waves-effect waves-light blue darker larger"
         onClick={submitHandler}
       >
         Create

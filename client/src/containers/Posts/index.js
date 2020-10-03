@@ -23,11 +23,17 @@ class Posts extends Component {
     }
   };
 
-  deletePostHandler = (id) => {
+  followUser = async () => {
     try {
-    } catch (error) {
-      M.toast({ html: error.response.data });
-    }
+      const user = await axios.put(
+        "profile/api/follow",
+        { followId: localStorage.getItem("id") },
+        {
+          headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        }
+      );
+      console.log(user);
+    } catch (error) {}
   };
 
   render() {

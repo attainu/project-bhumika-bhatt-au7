@@ -5,18 +5,24 @@ import { CreatePost } from "../../containers";
 
 const homePage = (props) => {
   const userId = localStorage.getItem("id");
+  const { renderPost, renderCreatePost, likes } = props;
   return (
     <div>
-      <i
-        class="large material-icons"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          onClick: { CreatePost },
-        }}
-      >
-        add_circle_outline
-      </i>
+      {renderPost ? (
+        <CreatePost />
+      ) : (
+        <i
+          className="large material-icons"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+          onClick={renderCreatePost}
+        >
+          add_circle_outline
+        </i>
+      )}
+
       <div className="home" style={{ margin: "26px auto" }}>
         {!props.posts ? (
           <h2>loading</h2>
