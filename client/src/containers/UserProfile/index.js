@@ -15,7 +15,10 @@ class UserProfile extends Component {
     const { userId } = this.props.computedMatch.params;
     try {
       const userPost = await axios.get(`http://localhost:3000/user/${userId}`, {
-        headers: { authorization: "Bearer " + localStorage.getItem("token") },
+        headers: {
+          authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("User")).token,
+        },
       });
       this.setState({ userPosts: userPost.data });
     } catch (error) {
