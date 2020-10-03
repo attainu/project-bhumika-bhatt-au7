@@ -5,7 +5,7 @@ class Post {
     return new Promise(async (res, rej) => {
       postSchema
         .find()
-        .populate("postedBy", "_id firstName lastName")
+        .populate("postedBy", "_id firstName lastName image")
         .populate("comments.postedBy", "_id firstName lastName")
         .populate("likes.postedBy", "_id firstName lastName")
         .exec((err, info) => {
@@ -21,9 +21,8 @@ class Post {
   createPost = (Req, post) => {
     return new Promise(async (res, rej) => {
       const newPost = {
-        title: post.title,
         description: post.description,
-        photo: post.photo,
+        file: post.file,
         postedBy: Req,
       };
       postSchema.create(newPost, (err, info) => {

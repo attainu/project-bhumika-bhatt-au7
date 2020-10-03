@@ -59,6 +59,12 @@ const signupValidator = [
     .bail()
     .withMessage("Password should not contains more than 25 characters"),
 
+  check("gender")
+    .not()
+    .isEmpty()
+    .bail()
+    .withMessage("Please select your gender"),
+
   (req, res, next) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {

@@ -49,6 +49,20 @@ const userSchema = new Schema(
       minlength: 10,
       maxlength: 15,
     },
+
+    image: {
+      type: String,
+      default: function () {
+        return this.gender === "female"
+          ? "https://res.cloudinary.com/connectx/image/upload/v1601755269/Default%20Avatars/female_mcza9a.png"
+          : "https://res.cloudinary.com/connectx/image/upload/v1601755269/Default%20Avatars/male_krak66.png";
+      },
+    },
+
+    gender: {
+      type: String,
+      required: true,
+    },
   },
   { versionKey: false, timestamps: true }
 );

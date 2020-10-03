@@ -10,14 +10,11 @@ class createPost extends Component {
   state = {
     error: "",
     formdata: {
-      title: "",
       description: "",
-      photo: "",
-      url: "",
+      file: "",
     },
   };
 
-  titleRef = React.createRef();
   descriptionRef = React.createRef();
   photoRef = React.createRef();
   urlRef = React.createRef();
@@ -34,7 +31,7 @@ class createPost extends Component {
   inputHandlerFile = (e) => {
     const { formdata } = this.state;
     this.setState({
-      formdata: { ...formdata, photo: e.target.files[0] },
+      formdata: { ...formdata, file: e.target.files[0] },
     });
   };
 
@@ -70,13 +67,17 @@ class createPost extends Component {
     //     M.toast({ html: error.response.data });
     //   }
     // }
+    const url = await this.uploadFile();
+    this.newPost(url);
+  };
 
+  newPost = async (url) => {
     const { formdata } = this.state;
 
     try {
       const response = await axios.post(
         "posts/createPost",
-        { description: formdata.description },
+        { description: formdata.description, file: url },
         {
           headers: {
             authorization:
@@ -89,11 +90,38 @@ class createPost extends Component {
         this.setState({
           formdata: { description: "" },
         });
-
+        M.toast({ html: "Post successfull!" });
         this.getPosts();
       }
     } catch (error) {
-      console.log(error.response);
+      this.setState({ error: "Post failed" });
+      console.log("Upload-error", error.response);
+    }
+  };
+
+  uploadFile = async () => {
+    const { formdata } = this.state;
+
+    if (formdata.file) {
+      try {
+        const fileData = new FormData();
+        fileData.append("file", formdata.file);
+        fileData.append("folder", "Posts");
+        fileData.append("upload_preset", "connectX");
+        fileData.append("cloud_name", "connectx");
+        const file = await axios.post(
+          "https://api.cloudinary.com/v1_1/connectx/image/upload",
+          fileData
+        );
+        if (file) {
+          return file.data.url;
+        }
+      } catch (error) {
+        this.setState({ error: "File upload failed" });
+        console.log("Cloudinary-error:", error);
+      }
+    } else {
+      return "";
     }
   };
 

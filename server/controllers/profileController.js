@@ -23,10 +23,20 @@ const profileController = {
         email,
         country,
         mobile,
+        image,
+        gender,
       } = user;
-      res
-        .status(200)
-        .send({ _id, firstName, lastName, userName, email, country, mobile });
+      res.status(200).send({
+        _id,
+        firstName,
+        lastName,
+        userName,
+        email,
+        country,
+        mobile,
+        image,
+        gender,
+      });
     } catch (error) {
       console.log(error);
       res.status(400).send(error._message);
@@ -34,7 +44,6 @@ const profileController = {
   },
 
   updateUser: async (req, res) => {
-    console.log("Profile", req.body);
     try {
       const info = await Profile.updateUser(req.body);
       res.status(200).send("User details updated successfully!");

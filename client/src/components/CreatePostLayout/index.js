@@ -1,5 +1,5 @@
 import React from "react";
-import { Textarea, Row, Button, Col } from "react-materialize";
+import { Textarea, Row, Button } from "react-materialize";
 
 import "./style.css";
 
@@ -8,8 +8,8 @@ const CreatePostLayout = (props) => {
     error,
     submitHandler,
     inputHandler,
+    inputHandlerFile,
     formdata: { description },
-    chooseFile,
   } = props;
 
   return (
@@ -23,6 +23,9 @@ const CreatePostLayout = (props) => {
           onChange={inputHandler}
           s={12}
         />
+        <div className="errorPost">
+          <span>{error}</span>
+        </div>
 
         <Button
           id="post"
@@ -33,15 +36,10 @@ const CreatePostLayout = (props) => {
         >
           Post
         </Button>
-        <Button
-          small
-          id="chooseFile"
-          waves="purple"
-          className="botton3 purple darken-2"
-          onClick={chooseFile}
-        >
-          Choose file
-        </Button>
+        <label className="edit2" htmlFor="upload2">
+          CHOOSE FILE
+        </label>
+        <input id="upload2" onChange={inputHandlerFile} type="file"></input>
       </Row>
     </div>
   );

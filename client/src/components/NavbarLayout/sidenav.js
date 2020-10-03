@@ -5,17 +5,12 @@ import "./style.scss";
 
 const Sidenav = (props) => {
   const { showProfile, showSettings, logoutHandler, search } = props;
-  const userName = JSON.parse(localStorage.getItem("User")).userName;
+  const user = JSON.parse(localStorage.getItem("User"));
 
   return (
     <div>
-      <Card
-        id="dp"
-        header={
-          <CardTitle image="https://www.w3schools.com/w3images/avatar2.png"></CardTitle>
-        }
-      >
-        {"@" + userName}
+      <Card id="dp" header={<CardTitle image={user.image}></CardTitle>}>
+        {"@" + user.userName}
       </Card>
       <form onSubmit={search}>
         <input

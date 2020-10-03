@@ -23,11 +23,11 @@ const Homepage = (props) => {
                 <div className="dp2">
                   <img
                     id="dp3"
-                    src="https://www.w3schools.com/w3images/avatar2.png"
+                    src={post.postedBy.image}
                     alt={post.postedBy.userName}
                   ></img>
                   <span id="name">
-                    @{post.postedBy.firstName + " " + post.postedBy.lastName}
+                    {post.postedBy.firstName + " " + post.postedBy.lastName}
                   </span>
                   {post.postedBy._id ===
                     JSON.parse(localStorage.getItem("User"))._id && (
@@ -42,21 +42,26 @@ const Homepage = (props) => {
                   )}
                 </div>
                 <div className="post2">
-                  <img
-                    id="postImg"
-                    src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-                    alt="img"
-                  />
+                  {post.file === "" || post.file === undefined ? (
+                    <div className="textImg">
+                      <span id="postText">{post.description}</span>
+                    </div>
+                  ) : (
+                    <img id="postImg" src={post.file} alt="img" />
+                  )}
                 </div>
                 <div className="engagement">
-                  <h5>{post.description}</h5>
+                  <h5>{post.file && post.description}</h5>
                   {post.likes.includes(_id) ? (
                     <i
                       className="material-icons"
                       onClick={() => {
                         props.unlike(post._id);
                       }}
-                      style={{ cursor: "pointer", userSelect: "none" }}
+                      style={{
+                        cursor: "pointer",
+                        userSelect: "none",
+                      }}
                     >
                       thumb_down
                     </i>
@@ -97,7 +102,7 @@ const Homepage = (props) => {
                     }}
                   >
                     <TextInput
-                      id="addComment"
+                      id={idx.toString()}
                       name="comment"
                       placeholder="Add comment"
                       noLayout

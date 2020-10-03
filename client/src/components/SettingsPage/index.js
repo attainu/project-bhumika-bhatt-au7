@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Col, TextInput, Container, Button } from "react-materialize";
+import { Row, Col, TextInput, Button, RadioGroup } from "react-materialize";
 
 import "./style.css";
 
@@ -16,7 +16,10 @@ const SettingsPage = (props) => {
       password,
       newPassword,
       confirmPassword,
+      image,
+      gender,
     },
+    inputHandlerFile,
     inputHandler,
     submitHandler,
     firstNameRef,
@@ -34,7 +37,7 @@ const SettingsPage = (props) => {
 
   return (
     <Row>
-      <Col style={{ border: "1px solid", width: "100%" }} offset="">
+      <Col style={{ width: "100%" }}>
         <Col className="tabsCol l2 m3" offset="l3 m1">
           <a
             id="editProfile"
@@ -55,13 +58,13 @@ const SettingsPage = (props) => {
         </Col>
         <Col className="form l4 m6" offset="">
           <div className="dp">
-            <img
-              id="dp2"
-              src="https://www.w3schools.com/w3images/avatar2.png"
-              alt={userName}
-            ></img>
+            <img id="dp2" src={image} alt={userName}></img>
             <span>Email: {email}</span>
           </div>
+          <label className="edit" htmlFor="upload">
+            CHANGE IMAGE
+          </label>
+          <input id="upload" type="file" onChange={inputHandlerFile}></input>
 
           {!showPasswordForm ? (
             <form onSubmit={submitHandler}>
@@ -111,6 +114,24 @@ const SettingsPage = (props) => {
                 ref={mobileRef}
                 noLayout
               />
+              <RadioGroup
+                radioClassNames="gender"
+                withGap
+                label="Gender"
+                name="gender"
+                value={gender}
+                onChange={inputHandler}
+                options={[
+                  {
+                    label: "Male",
+                    value: "male",
+                  },
+                  {
+                    label: "Female",
+                    value: "female",
+                  },
+                ]}
+              ></RadioGroup>
               <div className="error">
                 <span>{error}</span>
               </div>

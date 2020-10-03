@@ -36,6 +36,8 @@ class Profile {
           userName: user.userName,
           country: user.country,
           mobile: user.mobile,
+          gender: user.gender,
+          image: user.image,
         },
         (err, info) => {
           if (err) {

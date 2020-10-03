@@ -31,10 +31,10 @@ class Posts extends Component {
   };
 
   render() {
-    const { userName } = JSON.parse(localStorage.getItem("User"));
+    const { userName, image } = JSON.parse(localStorage.getItem("User"));
     return (
       <div>
-        <ProfilePage userName={userName} />
+        <ProfilePage userName={userName} image={image} />
       </div>
     );
   }
