@@ -80,20 +80,22 @@ class Profile {
           if (err) {
             rej(err);
           }
-          userSchema.findByIdAndUpdate(
-            userId,
-            {
-              $push: { following: followId },
-            },
-            { new: true },
-            (err, info) => {
+          userSchema
+            .findByIdAndUpdate(
+              userId,
+              {
+                $push: { following: followId },
+              },
+              { new: true }
+            )
+            .select("-password")
+            .exec((err, info) => {
               if (err) {
                 rej(err);
               } else {
                 res(info);
               }
-            }
-          );
+            });
         }
       );
     });
@@ -102,7 +104,7 @@ class Profile {
   updateUserUnFollowing = (unfollowId, userId) => {
     return new Promise(async (res, rej) => {
       userSchema.findByIdAndUpdate(
-        followId,
+        unfollowId,
         {
           $pull: { followers: userId },
         },
@@ -111,20 +113,22 @@ class Profile {
           if (err) {
             rej(err);
           }
-          userSchema.findByIdAndUpdate(
-            userId,
-            {
-              $pull: { following: unfollowId },
-            },
-            { new: true },
-            (err, info) => {
+          userSchema
+            .findByIdAndUpdate(
+              userId,
+              {
+                $pull: { following: unfollowId },
+              },
+              { new: true }
+            )
+            .select("-password")
+            .exec((err, info) => {
               if (err) {
                 rej(err);
               } else {
                 res(info);
               }
-            }
-          );
+            });
         }
       );
     });

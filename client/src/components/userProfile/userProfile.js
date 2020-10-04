@@ -4,7 +4,7 @@ import { Row, Col, ProgressBar } from "react-materialize";
 import "./style.css";
 
 const userProfile = (props) => {
-  const { posts } = props;
+  const { posts, show } = props;
   return (
     <Row>
       {!props.user ? (
@@ -21,8 +21,24 @@ const userProfile = (props) => {
             ></img>
             <span>@{props.user.userName}</span>
           </div>
+          {show ? (
+            <button
+              className="btn waves-effect waves-light blue darker larger"
+              onClick={() => props.follow()}
+            >
+              Follow
+            </button>
+          ) : (
+            <button
+              className="btn waves-effect waves-light blue darker larger"
+              onClick={() => props.unfollow()}
+            >
+              UnFollow
+            </button>
+          )}
+
           <div className="userConnection">
-            {posts || 0} Posts || {props.user.followers.length} Followers ||{" "}
+            {posts || 0} Posts || {props.user.followers.length}followers ||{" "}
             {props.user.following.length} Following
           </div>
           <Row>

@@ -13,6 +13,7 @@ class Post {
             rej(err);
           } else {
             res(info);
+            console.log(info);
           }
         });
     });

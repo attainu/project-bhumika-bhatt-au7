@@ -25,6 +25,8 @@ const profileController = {
         mobile,
         image,
         gender,
+        followers,
+        following,
       } = user;
       res.status(200).send({
         _id,
@@ -36,6 +38,8 @@ const profileController = {
         mobile,
         image,
         gender,
+        followers,
+        following,
       });
     } catch (error) {
       console.log(error);
