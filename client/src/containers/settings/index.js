@@ -170,13 +170,13 @@ class Settings extends Component {
   };
 
   changePic = async () => {
-    const { file } = this.state;
+    const { file, user } = this.state;
 
     if (file) {
       try {
         const fileData = new FormData();
         fileData.append("file", file);
-        fileData.append("folder", "Avatars");
+        fileData.append("folder", `Avatars/${user.userName}`);
         fileData.append("upload_preset", "connectX");
         fileData.append("cloud_name", "connectx");
         const response = await axios.post(
