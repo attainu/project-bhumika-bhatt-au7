@@ -5,3 +5,5 @@ export { default as Posts } from "./Posts/index";
 export { default as HomePage } from "./HomePage/index";
 export { default as CreatePost } from "./CreatePost";
 export { default as UserProfile } from "./UserProfile";
+export { default as Chat } from "./chat";
+export { default as People } from "./people";

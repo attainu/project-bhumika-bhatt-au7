@@ -15,7 +15,7 @@ const navbar = (props) => {
   const user = JSON.parse(localStorage.getItem("User"));
   return (
     <Navbar
-      fixed={window.innerWidth < 993}
+      fixed
       centerChildren
       alignLinks="right"
       brand={

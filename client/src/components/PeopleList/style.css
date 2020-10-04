@@ -1,0 +1,9 @@
+.peopleList {
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 0 0 0 30px;
+  width: 180px;
+  box-shadow: 0 0 5px 2px gray;
+  min-height: 100vh;
+  position: fixed;
+}

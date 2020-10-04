@@ -4,7 +4,7 @@ import { Row, Col, ProgressBar, TextInput } from "react-materialize";
 import _ from "lodash";
 
 import "./style.css";
-import { CreatePost } from "../../containers";
+import { CreatePost, Chat, People } from "../../containers";
 
 const Homepage = (props) => {
   const { _id } = JSON.parse(localStorage.getItem("User"));
@@ -123,6 +123,12 @@ const Homepage = (props) => {
             );
           })
         )}
+      </Col>
+      <Col offset="l1">
+        <Chat />
+      </Col>
+      <Col offset="l1">
+        <People />
       </Col>
     </Row>
   );
