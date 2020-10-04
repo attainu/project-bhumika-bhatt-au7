@@ -25,7 +25,7 @@ const Homepage = (props) => {
                   <img
                     id="dp3"
                     src="https://www.w3schools.com/w3images/avatar2.png"
-                    alt={post.postedBy.userName}
+                    alt={post.postedBy.firstName}
                   ></img>
                   <span id="name">
                     <Link

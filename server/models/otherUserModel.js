@@ -9,7 +9,6 @@ class OtherUser {
         .select("-password")
         .exec((err, info1) => {
           if (err) {
-            console.log(err);
             rej(err);
           } else {
             postSchema

@@ -120,7 +120,7 @@ class index extends Component {
 
   getPosts = async () => {
     try {
-      const posts = await axios.get("/posts", {
+      const posts = await axios.get("http://localhost:5000/posts", {
         headers: {
           authorization:
             "Bearer " + JSON.parse(localStorage.getItem("User")).token,

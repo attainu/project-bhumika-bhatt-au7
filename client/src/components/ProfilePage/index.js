@@ -1,11 +1,10 @@
 import React from "react";
-import { Row, Col } from "react-materialize";
+import { Row, Col, ProgressBar } from "react-materialize";
 
 import "./style.css";
 
 const profilePage = (props) => {
-  const { userName, posts, followers, following } = props;
-
+  const { userName, posts } = props;
   return (
     <Row>
       <Col s={12} m={8} l={6} offset="m2 l3">
@@ -17,9 +16,9 @@ const profilePage = (props) => {
           ></img>
           <span>@{userName}</span>
         </div>
+
         <div className="userConnection">
-          {posts || 0} Posts || {followers || 0} Followers || {following || 0}{" "}
-          Following
+          {posts || 0} Posts || {0} Followers || {0} Following
         </div>
         <Row>
           <div className="posts center-align">
