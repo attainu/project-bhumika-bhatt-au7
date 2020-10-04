@@ -32,7 +32,6 @@ class index extends Component {
         }
       );
       // const newData = this.props.allPost.map((item) => {
-      //   console.log(likes);
       //   if (item._id === likes.data.likes._id) {
       //     return likes;
       //   } else {

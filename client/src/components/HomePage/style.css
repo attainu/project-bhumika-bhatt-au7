@@ -48,3 +48,18 @@
 #postImg {
   width: 100%;
 }
+
+.textImg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-wrap: break-word;
+  border: 1px solid;
+  min-height: 200px;
+}
+
+#postText {
+  text-align: center;
+  width: 100%;
+  font-size: 50px;
+}

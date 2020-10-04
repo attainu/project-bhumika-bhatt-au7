@@ -21,3 +21,26 @@
   margin-right: 20px;
   margin-left: 5px;
 }
+
+#upload2 {
+  width: 0;
+}
+
+.edit2 {
+  border: 1px solid;
+  margin-top: -1px;
+  padding: 7.5px;
+  float: right;
+  color: white;
+  border-radius: 3px;
+  background-color: #7b1fa2;
+}
+
+.textArea {
+  margin-bottom: -20px;
+}
+
+.errorPost {
+  color: #c62828;
+  margin-left: 10px;
+}

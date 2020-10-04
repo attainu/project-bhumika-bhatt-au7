@@ -17,6 +17,7 @@ class Authentication extends Component {
       email: "",
       password: "",
       confirmPassword: "",
+      gender: "",
     },
     loginFormData: {
       loginEmail: "",
@@ -56,6 +57,7 @@ class Authentication extends Component {
           lastName: signupFormData.lastName,
           email: signupFormData.email,
           password: signupFormData.password,
+          gender: signupFormData.gender,
         });
 
         if (data) {
@@ -112,7 +114,6 @@ class Authentication extends Component {
         confirmPassword: "",
       },
     });
-    console.log("Fields cleared");
   };
 
   createAccount = (e) => {

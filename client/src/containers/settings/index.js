@@ -6,18 +6,23 @@ import { SettingsPage } from "../../components";
 import { WEB_URL } from "../../configs";
 
 class Settings extends Component {
+  user = JSON.parse(localStorage.getItem("User"));
+
   state = {
     user: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      mobile: "",
-      userName: "",
-      country: "",
-      password: "",
-      newPassword: "",
-      confirmPassword: "",
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      email: this.user.email,
+      mobile: this.user.mobile,
+      userName: this.user.userName,
+      country: this.user.country,
+      password: this.user.password,
+      newPassword: this.user.newPassword,
+      confirmPassword: this.user.confirmPassword,
+      image: this.user.image,
+      gender: this.user.gender,
     },
+    file: "",
     showPasswordForm: false,
   };
 
@@ -49,6 +54,8 @@ class Settings extends Component {
             mobile: response.data.mobile,
             userName: response.data.userName,
             country: response.data.country,
+            image: response.data.image,
+            gender: response.data.gender,
             password: "",
             newPassword: "",
             confirmPassword: "",
@@ -76,6 +83,12 @@ class Settings extends Component {
     });
   };
 
+  inputHandlerFile = (e) => {
+    this.setState({
+      file: e.target.files[0],
+    });
+  };
+
   submitHandler = async (e) => {
     e.preventDefault();
 
@@ -90,9 +103,12 @@ class Settings extends Component {
         userName: user.userName,
         country: user.country,
         mobile: user.mobile,
+        image: await this.changePic(),
+        gender: user.gender,
       });
 
       if (response) {
+        this.getUserProfile();
         M.toast({ html: "User details successfully updated!" });
         history.push(WEB_URL.SETTINGS);
       }
@@ -153,6 +169,33 @@ class Settings extends Component {
     }
   };
 
+  changePic = async () => {
+    const { file } = this.state;
+
+    if (file) {
+      try {
+        const fileData = new FormData();
+        fileData.append("file", file);
+        fileData.append("folder", "Avatars");
+        fileData.append("upload_preset", "connectX");
+        fileData.append("cloud_name", "connectx");
+        const response = await axios.post(
+          "https://api.cloudinary.com/v1_1/connectx/image/upload",
+          fileData
+        );
+
+        if (response) {
+          return response.data.url;
+        }
+      } catch (error) {
+        this.setState({ error: "Image upload failed" });
+        console.log("Cloudinary-error:", error);
+      }
+    } else {
+      return "";
+    }
+  };
+
   render() {
     const { user, showPasswordForm } = this.state;
 
@@ -162,6 +205,7 @@ class Settings extends Component {
         showPasswordForm={showPasswordForm}
         submitHandler={this.submitHandler}
         inputHandler={this.inputHandler}
+        inputHandlerFile={this.inputHandlerFile}
         changePassword={this.changePassword}
         firstNameRef={this.firstNameRef}
         lastNameRef={this.lastNameRef}

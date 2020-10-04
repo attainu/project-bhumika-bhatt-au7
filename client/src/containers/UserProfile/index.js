@@ -22,7 +22,7 @@ class UserProfile extends Component {
     const { userId } = this.props.computedMatch.params;
     const { token } = JSON.parse(localStorage.getItem("User"));
     try {
-      const userPost = await axios.get(`http://localhost:3000/user/${userId}`, {
+      const userPost = await axios.get(`/user/${userId}`, {
         headers: { authorization: "Bearer " + token },
       });
       this.setState({ userPosts: userPost.data });
@@ -36,7 +36,7 @@ class UserProfile extends Component {
     const { token } = JSON.parse(localStorage.getItem("User"));
     try {
       const user = await axios.put(
-        "http://localhost:5000/profile/api/follow",
+        "/profile/api/follow",
         { followId: userId },
         {
           headers: { authorization: "Bearer " + token },
@@ -66,7 +66,7 @@ class UserProfile extends Component {
     const { token } = JSON.parse(localStorage.getItem("User"));
     try {
       const user = await axios.put(
-        "http://localhost:5000/profile/api/unfollow",
+        "/profile/api/unfollow",
         { unfollowId: userId },
         {
           headers: { authorization: "Bearer " + token },

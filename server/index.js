@@ -35,7 +35,7 @@ app.use("/user", otherUserRoute);
 
 // Homepage
 app.use("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../build", "index.html"));
+  res.send("connect-x server home");
 });
 
 // app.get("/authentication", (req, res) => {

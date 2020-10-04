@@ -21,6 +21,7 @@ class User {
         lastName: user.lastName,
         email: user.email,
         password: await hashPassword(user.password),
+        gender: user.gender,
       };
 
       userSchema.create(newUser, (err, info) => {

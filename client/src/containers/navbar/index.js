@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import { NavbarLayout } from "../../components";
+import WEB_URL from "../../configs/webUrl";
 
 class Navbar extends Component {
   logoutHandler = (e) => {
@@ -8,7 +9,7 @@ class Navbar extends Component {
 
     const { history } = this.props;
     localStorage.clear();
-    history.push("/");
+    history.push(WEB_URL.HOMEPAGE);
   };
 
   search = (e) => {
@@ -19,19 +20,19 @@ class Navbar extends Component {
     e.preventDefault();
 
     const { history } = this.props;
-    history.push("/");
+    history.push(WEB_URL.HOMEPAGE);
   };
   showProfile = (e) => {
     e.preventDefault();
 
     const { history } = this.props;
-    history.push("/profile");
+    history.push(WEB_URL.PROFILE);
   };
   showSettings = (e) => {
     e.preventDefault();
 
     const { history } = this.props;
-    history.push("/settings");
+    history.push(WEB_URL.SETTINGS);
   };
 
   render() {

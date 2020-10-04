@@ -1,5 +1,12 @@
 import React from "react";
-import { TextInput, Button, Container, Row, Col } from "react-materialize";
+import {
+  TextInput,
+  Button,
+  Container,
+  Row,
+  Col,
+  RadioGroup,
+} from "react-materialize";
 
 import "./style.css";
 
@@ -15,6 +22,7 @@ const AuthenticationPage = (props) => {
       email,
       password,
       confirmPassword,
+      gender,
     },
     loginFormData: { loginPassword, loginEmail },
     loginEmailRef,
@@ -32,7 +40,7 @@ const AuthenticationPage = (props) => {
 
   return (
     <Container>
-      <Row className="background">
+      <Row className="cont">
         {display ? (
           <Col s={12} m={8} l={6} offset="m2 l3">
             <div className="hide-on-large-only brandMobile">
@@ -105,6 +113,24 @@ const AuthenticationPage = (props) => {
                   s={12}
                   m={6}
                 />
+                <RadioGroup
+                  radioClassNames="gender"
+                  withGap
+                  label="Gender"
+                  name="gender"
+                  value={gender}
+                  onChange={inputHandler}
+                  options={[
+                    {
+                      label: "Male",
+                      value: "male",
+                    },
+                    {
+                      label: "Female",
+                      value: "female",
+                    },
+                  ]}
+                ></RadioGroup>
               </Col>
               <div className="error">
                 <span>{error}</span>

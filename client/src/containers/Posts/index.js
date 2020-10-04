@@ -34,7 +34,7 @@ class Posts extends Component {
           },
         }
       );
-      console.log(User);
+
       this.setState({ user: User.data });
     } catch (error) {}
   };
@@ -48,7 +48,6 @@ class Posts extends Component {
             "Bearer " + JSON.parse(localStorage.getItem("User")).token,
         },
       });
-      console.log(myPost);
       this.setState({ posts: myPost.data });
     } catch (error) {
       M.toast({ html: error.response.data });
@@ -56,10 +55,10 @@ class Posts extends Component {
   };
 
   render() {
-    const { userName } = JSON.parse(localStorage.getItem("User"));
+    const { userName, image } = JSON.parse(localStorage.getItem("User"));
     return (
       <div>
-        <ProfilePage userName={userName} />
+        <ProfilePage userName={userName} image={image} user={this.state.user} />
       </div>
     );
   }

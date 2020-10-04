@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Icon, Dropdown, Divider } from "react-materialize";
+import { Navbar, Icon, Dropdown } from "react-materialize";
 
 import "./style.scss";
 import Sidenav from "./sidenav";
