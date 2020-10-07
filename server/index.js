@@ -1,6 +1,7 @@
-import path from "path";
+import { createServer } from "http";
 
 import express, { urlencoded, json } from "express";
+import socketIO from "socket.io";
 import cors from "cors";
 import "dotenv/config";
 
@@ -15,17 +16,17 @@ import {
   postRoute,
   otherUserRoute,
 } from "./routes";
+import { set } from "mongoose";
 
 const app = express();
+const server = createServer(app);
 app.use(urlencoded({ extended: true }));
 app.use(json());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "../build")));
-
 // Server port
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
+server.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -38,11 +39,23 @@ app.use("/", (req, res) => {
   res.send("connect-x server home");
 });
 
-// app.get("/authentication", (req, res) => {
-//   res.redirect("/");
-// });
+// Socket IO
+const io = socketIO(server);
+const online = [];
 
-// Invalid path handler
-// app.use((req, res) => {
-//   res.send(`<h1>Error 404! Path not found...<h1>`);
-// });
+io.on("connect", (socket) => {
+  socket.on("room", (room) => {
+    socket.join(room);
+
+    socket.on("text", (data) => {
+      console.log(data);
+      io.to(room).emit("message", data);
+    });
+  });
+
+  socket.on("online", (id) => {
+    socket.join("online");
+    online.push(id);
+    io.to("online").emit("live", [...new Set(online)]);
+  });
+});

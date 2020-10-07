@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import io from "socket.io-client";
 import axios from "axios";
 import M from "materialize-css";
 
@@ -15,9 +16,17 @@ class index extends Component {
 
   componentDidMount = () => {
     this.getPosts();
-  };
 
-  componentDidUpdate = () => {};
+    // const socket = io();
+    // socket.emit(
+    //   "online",
+    //   JSON.parse(localStorage.getItem("User")) &&
+    //     JSON.parse(localStorage.getItem("User"))._id
+    // );
+    // socket.on("live", (id) => {
+    //   console.log(id);
+    // });
+  };
 
   likePost = async (postId) => {
     try {
@@ -128,7 +137,6 @@ class index extends Component {
       if (posts) {
         // this.setState({ posts: posts.data });
         this.props.posts(posts.data.reverse());
-        console.log(this.state.posts);
       }
     } catch (error) {
       M.toast({ html: error });
