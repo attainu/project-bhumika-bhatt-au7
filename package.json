@@ -34,6 +34,7 @@
     "mongoose": "^5.10.5",
     "nodemailer": "^6.4.13",
     "nodemailer-sendgrid-transport": "^0.2.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "socket.io": "^2.3.0"
   }
 }

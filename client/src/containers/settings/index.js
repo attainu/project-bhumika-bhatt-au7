@@ -176,7 +176,7 @@ class Settings extends Component {
       try {
         const fileData = new FormData();
         fileData.append("file", file);
-        fileData.append("folder", `Avatars/${user.userName}`);
+        fileData.append("folder", `Avatars/${user._id}`);
         fileData.append("upload_preset", "connectX");
         fileData.append("cloud_name", "connectx");
         const response = await axios.post(

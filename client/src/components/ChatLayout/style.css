@@ -1,0 +1,36 @@
+.chatCont {
+  border: 1px solid;
+  margin: 100vh 0 0 -60px;
+  width: 200px;
+  border-radius: 5px;
+  box-shadow: 0 0 5px 2px gray;
+  padding: 0 5px 0 5px;
+  min-height: 50vh;
+  position: fixed;
+}
+
+#chatText {
+  border: 1px solid;
+  width: 75%;
+  padding: 0 5px 0 5px;
+}
+
+.chatActive {
+  border: 1px solid;
+  margin: 50vh 0 0 -60px;
+  width: 200px;
+  border-radius: 5px;
+  height: 50vh;
+  box-shadow: 0 0 5px 2px gray;
+  padding: 0 5px 0 5px;
+  position: fixed;
+}
+
+.chat {
+  overflow: auto;
+  text-align: center;
+  word-wrap: break-word;
+  border: 1px solid;
+  height: 50%;
+  margin: 5vh 0 0 0;
+}
