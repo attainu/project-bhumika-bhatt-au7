@@ -33,6 +33,33 @@ class User {
       });
     });
   };
+
+  reset = (email) => {
+    return new Promise(async (res, rej) => {
+      userSchema.findOne({ email }, (err, info) => {
+        if (err) {
+          rej(err);
+        } else {
+          res(info);
+        }
+      });
+    });
+  };
+
+  setPassword = (token) => {
+    return new Promise(async (res, rej) => {
+      userSchema.findOne(
+        { resetToken: token, expireToken: { $gt: Date.now() } },
+        (err, info) => {
+          if (err) {
+            rej(err);
+          } else {
+            res(info);
+          }
+        }
+      );
+    });
+  };
 }
 
 export default new User();

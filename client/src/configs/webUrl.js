@@ -5,4 +5,5 @@ export default {
   PROFILE: "/profile",
   CREATE: "/create",
   USER_PROFILE: "/profile/:userId",
+  RESET_PASSWORD: "/reset/:token",
 };
