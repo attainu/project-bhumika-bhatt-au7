@@ -50,6 +50,8 @@ const userSchema = new Schema(
       minlength: 10,
       maxlength: 15,
     },
+    resetToken: String,
+    expireToken: Date,
 
     image: {
       type: String,

@@ -7,3 +7,4 @@ export { default as PrivateRoute } from "./RouteManagement/PrivateRoute";
 export { default as PublicRoute } from "./RouteManagement/PublicRoute";
 export { default as SettingsPage } from "./SettingsPage";
 export { default as UserProfilePage } from "./userProfile/userProfile";
+export { default as ResetPage } from "./ResetPassword";

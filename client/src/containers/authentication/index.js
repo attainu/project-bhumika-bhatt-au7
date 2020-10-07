@@ -136,8 +136,27 @@ class Authentication extends Component {
     });
   };
 
-  resetPassword = (e) => {
+  resetPassword = async (e) => {
     e.preventDefault();
+    const { loginFormData } = this.state;
+    const { history } = this.props;
+    const email = loginFormData.loginEmail;
+    if (!email) {
+      return M.toast({ html: "Please enter the email to reset the password!" });
+    }
+    try {
+      const response = await axios.post("/login/reset", {
+        email: loginFormData.loginEmail,
+      });
+      console.log(response.data.message);
+      M.toast({ html: response.data.message });
+      // history.push(WEB_URL.AUTHENTICATION);
+    } catch (error) {
+      this.setState({
+        error: error.response.data,
+      });
+      console.log("Login-error:", error.response.data);
+    }
   };
 
   render() {
