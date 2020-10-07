@@ -25,6 +25,16 @@ const postController = {
       res.status(400).send(error._message);
     }
   },
+
+  userPosts: async (req, res) => {
+    try {
+      const posts = await Post.myPost(req.params.id);
+      res.status(200).json(posts);
+    } catch (error) {
+      res.status(400).send(error._message);
+    }
+  },
+
   onePost: async (req, res) => {
     try {
       const post = await Post.onePost(req.params.postId);

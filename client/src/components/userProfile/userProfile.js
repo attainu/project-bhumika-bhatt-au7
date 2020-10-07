@@ -16,49 +16,51 @@ const userProfile = (props) => {
           <div className="dp">
             <img
               id="dp2"
-              src="https://www.w3schools.com/w3images/avatar2.png"
+              src={props.user.image}
               alt={props.user.userName}
             ></img>
             <span>@{props.user.userName}</span>
           </div>
-          {show ? (
-            <button
-              className="btn waves-effect waves-light blue darker larger"
-              onClick={() => props.follow()}
-            >
-              Follow
-            </button>
-          ) : (
-            <button
-              className="btn waves-effect waves-light blue darker larger"
-              onClick={() => props.unfollow()}
-            >
-              UnFollow
-            </button>
-          )}
-
           <div className="userConnection">
-            {posts || 0} Posts || {props.user.followers.length}followers ||{" "}
-            {props.user.following.length} Following
+            {show ? (
+              <button
+                className="btn waves-effect waves-light blue darker larger"
+                onClick={() => props.follow()}
+              >
+                Follow
+              </button>
+            ) : (
+              <button
+                className="btn waves-effect waves-light blue darker larger"
+                onClick={() => props.unfollow()}
+              >
+                UnFollow
+              </button>
+            )}
+            <span style={{ margin: "5px 0 0 10px" }}>
+              {(posts && posts.length) || 0} Posts ||{" "}
+              {props.user.followers.length} followers ||{" "}
+              {props.user.following.length} Following
+            </span>
           </div>
           <Row>
-            <div className="posts center-align">
+            <div className="postsUser center-align">
               <Col>
-                <img
-                  className="post3"
-                  src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-                  alt={props.user.userName}
-                ></img>
-                <img
-                  className="post3"
-                  src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-                  alt={props.user.userName}
-                ></img>
-                <img
-                  className="post3"
-                  src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
-                  alt={props.user.userName}
-                ></img>
+                {console.log(props.posts)}
+                {!props.posts ? (
+                  <Col s={10} offset="s1">
+                    <ProgressBar className="purple" />
+                  </Col>
+                ) : (
+                  props.posts.map((item) => {
+                    return (
+                      // <div className="post3">
+                      <img className="post3" src={item.file} key={item._id} />
+                      //   <span></span>
+                      // </div>
+                    );
+                  })
+                )}
               </Col>
             </div>
           </Row>
