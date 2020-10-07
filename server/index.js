@@ -44,4 +44,12 @@ app.use("/", (req, res) => {
 // Socket IO
 const io = socketIO(server);
 
-// io.on("connect", (socket) => {});
+io.on("connect", (socket) => {
+  socket.on("room", (id) => {
+    socket.join(id);
+
+    socket.on("text", (text) => {
+      io.to(id).emit("message", text);
+    });
+  });
+});

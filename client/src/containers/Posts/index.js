@@ -58,7 +58,6 @@ class Posts extends Component {
   render() {
     const { userName, image } = JSON.parse(localStorage.getItem("User"));
     const { user, posts } = this.state;
-    console.log(posts);
     return (
       <div>
         <ProfilePage

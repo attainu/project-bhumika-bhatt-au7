@@ -5,7 +5,6 @@ import "./style.css";
 
 const profilePage = (props) => {
   const { userName, posts, user, image } = props;
-  console.log(posts);
 
   return (
     <Row>

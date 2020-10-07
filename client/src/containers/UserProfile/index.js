@@ -14,11 +14,11 @@ class UserProfile extends Component {
     this.getPosts();
   };
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.userPosts !== this.state.userPosts) {
-  //     this.getUser();
-  //   }
-  // }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.userPosts !== this.state.userPosts) {
+      this.getUser();
+    }
+  }
 
   getUser = async () => {
     const { userId } = this.props.computedMatch.params;
@@ -28,7 +28,6 @@ class UserProfile extends Component {
         headers: { authorization: "Bearer " + token },
       });
       this.setState({ userPosts: userPost.data });
-      console.log(userPost);
     } catch (error) {
       console.log(error);
     }

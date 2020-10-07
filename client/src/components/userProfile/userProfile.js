@@ -46,7 +46,6 @@ const userProfile = (props) => {
           <Row>
             <div className="postsUser center-align">
               <Col>
-                {console.log(props.posts)}
                 {!props.posts ? (
                   <Col s={10} offset="s1">
                     <ProgressBar className="purple" />
