@@ -25,6 +25,22 @@ class OtherUser {
         });
     });
   };
+
+  search = (query) => {
+    return new Promise(async (res, rej) => {
+      let userPattern = new RegExp("^" + query);
+      userSchema
+        .find({ email: { $regex: userPattern } })
+        .select("_id email")
+        .exec((err, info) => {
+          if (err) {
+            rej(err);
+          } else {
+            res(info);
+          }
+        });
+    });
+  };
 }
 
 export default new OtherUser();
