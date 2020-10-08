@@ -30,18 +30,25 @@ const userController = {
             mobile,
             gender,
             image,
+            isVerified,
           } = user;
-          res.status(200).send({
-            token,
-            _id,
-            firstName,
-            lastName,
-            userName,
-            country,
-            mobile,
-            gender,
-            image,
-          });
+          if (isVerified) {
+            res.status(200).send({
+              token,
+              _id,
+              firstName,
+              lastName,
+              userName,
+              country,
+              mobile,
+              gender,
+              image,
+            });
+          } else {
+            res.json({
+              message: "Please Verify the registered Email to login !!!",
+            });
+          }
         } else {
           res.status(400).send("Incorrect password!");
         }
@@ -57,13 +64,41 @@ const userController = {
   signup: async (req, res) => {
     try {
       const user = await User.signup(req.body);
-      transporter.sendMail({
-        to: user.email,
-        from: "connectxapp@gmail.com",
-        subject: "Successfully SignedUp",
-        html: `<h2>Hello <mark>${user.firstName} ${user.lastName}!!</mark> Welcome to ConnectX.</h2>`,
+      if (user) {
+        // Send verification email
+        const emailToken = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, {
+          expiresIn: "1d",
+        });
+        const Link = `https://connectxapp.herokuapp.com
+        /signup/verification/${emailToken}`;
+
+        console.log(emailToken, user.email);
+        transporter.sendMail({
+          to: user.email,
+          from: "connectxapp@gmail.com",
+          subject: "Successfully SignedUp",
+          html: `<h2>Hello <mark>${user.firstName} ${user.lastName}!!</mark> Welcome to ConnectX. <h1>Please click on the <mark><a href =${Link}>Link</a></mark></h2>`,
+        });
+      }
+      return res.status(200).json({
+        message:
+          "Registered successfully! Please go to registered mail Id to verify the email.",
       });
-      return res.status(200).json({ message: "User created successfully!" });
+    } catch (error) {
+      console.dir(error);
+      res.status(400).send(error._message);
+    }
+  },
+
+  verification: async (req, res) => {
+    console.log(req.params);
+    try {
+      // Verify email account
+      const verified = jwt.verify(req.params.token, process.env.SECRET_KEY);
+      const user = await User.verification(verified._id);
+      res.json({
+        verified: "Email Verification success, Please continue to login!!!",
+      });
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);
