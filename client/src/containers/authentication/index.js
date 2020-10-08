@@ -89,12 +89,20 @@ class Authentication extends Component {
         email: loginFormData.loginEmail,
         password: loginFormData.loginPassword,
       });
+      if (response.data.message) {
+        console.log("working");
+        this.setState({
+          error: response.data.message,
+        });
+      }
+      // console.log(response.data.message);
+      else {
+        localStorage.setItem("User", JSON.stringify(response.data));
 
-      localStorage.setItem("User", JSON.stringify(response.data));
+        this.props.login(response.data);
 
-      this.props.login(response.data);
-
-      history.push(WEB_URL.HOMEPAGE);
+        history.push(WEB_URL.HOMEPAGE);
+      }
     } catch (error) {
       this.setState({
         error: error.response.data,

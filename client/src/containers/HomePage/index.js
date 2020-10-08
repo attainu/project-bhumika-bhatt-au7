@@ -11,6 +11,7 @@ class index extends Component {
     renderPost: false,
     likes: [],
     posts: null,
+    disable: true,
   };
 
   componentDidMount = () => {
@@ -139,6 +140,7 @@ class index extends Component {
     return (
       <div>
         <Homepage
+          disbale={this.state.disable}
           posts={this.props.allPost}
           like={this.likePost}
           likes={this.state.likes}

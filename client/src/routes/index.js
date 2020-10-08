@@ -5,6 +5,7 @@ import profileRoute from "./profileRoute";
 import createPostRoute from "./createPostRoute";
 import userProfileRoute from "./userProfileRoute";
 import resetPasswordRoute from "./resetPasswordRoute";
+import verificationRoute from "./verificationRoute";
 
 export default [
   ...authenticationRoute,
@@ -14,4 +15,5 @@ export default [
   ...createPostRoute,
   ...userProfileRoute,
   ...resetPasswordRoute,
+  ...verificationRoute,
 ];
