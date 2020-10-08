@@ -1,16 +1,28 @@
 import React, { Component } from "react";
 import io from "socket.io-client";
+import axios from "axios";
 
 import { ChatLayout } from "../../components";
 
 const socket = io();
-socket.emit("room", "room");
+const room = "room";
+const user = JSON.parse(localStorage.getItem("User"));
+socket.emit("room", room);
 
 class Chat extends Component {
   state = {
     text: "",
-    message: [],
+    message: "",
+    previousMessage: [],
   };
+
+  componentDidMount() {
+    this.getMessage();
+  }
+
+  componentDidUpdate() {
+    this.getMessage();
+  }
 
   inputHandler = (e) => {
     const value = e.target.value;
@@ -19,17 +31,37 @@ class Chat extends Component {
     });
   };
 
+  getMessage = async () => {
+    try {
+      const response = await axios.get(`chat/api/v2/${room}`);
+
+      if (response) {
+        this.setState({
+          previousMessage: response.data,
+          message: [],
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   sendMessage = (e) => {
     e.preventDefault();
-    socket.emit("text", this.state.text);
+    socket.emit("text", { user: user.firstName, text: this.state.text });
 
-    const { message, text } = this.state;
-    socket.on("message", (text) => {
+    socket.on("message", (data) => {
       this.setState({
-        message: [...message, text],
+        message: data,
         text: "",
       });
     });
+    this.updateScroll();
+  };
+
+  updateScroll = () => {
+    let element = document.getElementById("chatLen");
+    element.scrollTop = element.scrollHeight + 10;
   };
 
   render() {
@@ -39,6 +71,7 @@ class Chat extends Component {
         text={this.state.text}
         sendMessage={this.sendMessage}
         message={this.state.message}
+        previousMessage={this.state.previousMessage}
       />
     );
   }

@@ -27,10 +27,32 @@
 }
 
 .chat {
-  overflow: auto;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
   text-align: center;
   word-wrap: break-word;
   border: 1px solid;
   height: 50%;
   margin: 5vh 0 0 0;
+}
+
+#curr {
+  float: right;
+  width: 80%;
+  margin: 5px;
+  display: block;
+  text-align: right;
+  box-shadow: 0 0 2px 1px gray;
+  border-radius: 3px 3px 0 3px;
+  padding: 2px;
+}
+
+#other {
+  float: left;
+  width: 80%;
+  margin: 5px;
+  text-align: left;
+  box-shadow: 0 0 2px 1px gray;
+  border-radius: 3px 3px 3px 0;
+  padding: 2px;
 }

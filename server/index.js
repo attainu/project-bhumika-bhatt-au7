@@ -16,6 +16,7 @@ import {
   profileRoute,
   postRoute,
   otherUserRoute,
+  chatRoute,
 } from "./routes";
 
 const app = express();
@@ -35,6 +36,7 @@ app.use("/login", loginRoute);
 app.use("/profile", profileRoute);
 app.use("/posts", postRoute);
 app.use("/user", otherUserRoute);
+app.use("/chat", chatRoute);
 
 // Homepage
 app.use("/", (req, res) => {
@@ -42,14 +44,21 @@ app.use("/", (req, res) => {
 });
 
 // Socket IO
+import { chatController } from "./controllers";
 const io = socketIO(server);
 
 io.on("connect", (socket) => {
   socket.on("room", (id) => {
     socket.join(id);
 
-    socket.on("text", (text) => {
-      io.to(id).emit("message", text);
+    socket.on("text", async (data) => {
+      const message = {
+        room: id,
+        user: data.user,
+        message: data.text,
+      };
+      io.to(id).emit("message", message);
+      await chatController.create(message);
     });
   });
 });

@@ -5,7 +5,7 @@ import _ from "lodash";
 import "./style.css";
 
 const ChatLayout = (props) => {
-  const { text, inputHandler, sendMessage, message } = props;
+  const { text, inputHandler, sendMessage, message, previousMessage } = props;
 
   return (
     <div className="chatCont white">
@@ -19,12 +19,19 @@ const ChatLayout = (props) => {
       >
         close
       </i>
-      <div className="chat">
+      <div className="chat" id="chatLen">
         <ul>
-          {message &&
-            _.map(message, (text, idx) => {
-              return <li key={idx}>{text}</li>;
+          {previousMessage &&
+            _.map(previousMessage, (data, idx) => {
+              const user = JSON.parse(localStorage.getItem("User"));
+              const id = data.user === user.firstName ? "curr" : "other";
+              return (
+                <li id={id} key={idx}>
+                  {data.message}
+                </li>
+              );
             })}
+          {message.user && <li id="curr">{message.message}</li>}
         </ul>
       </div>
       <form onSubmit={sendMessage}>
