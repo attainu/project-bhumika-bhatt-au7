@@ -69,8 +69,7 @@ const userController = {
         const emailToken = jwt.sign({ _id: user._id }, process.env.SECRET_KEY, {
           expiresIn: "1d",
         });
-        const Link = `https://connectxapp.herokuapp.com
-        /signup/verification/${emailToken}`;
+        const Link = `http://localhost:5000/signup/verification/${emailToken}`;
 
         console.log(emailToken, user.email);
         transporter.sendMail({
@@ -96,9 +95,9 @@ const userController = {
       // Verify email account
       const verified = jwt.verify(req.params.token, process.env.SECRET_KEY);
       const user = await User.verification(verified._id);
-      res.json({
-        verified: "Email Verification success, Please continue to login!!!",
-      });
+      res.send(
+        `<h4>Email Verification success, Please continue to login!!! click here to login <a href="http://localhost:3000">Login</a></h>`
+      );
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);
