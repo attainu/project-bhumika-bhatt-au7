@@ -24,7 +24,7 @@ class Posts extends Component {
   getUser = async () => {
     try {
       const User = await axios.get(
-        `profile/api/v2/${JSON.parse(localStorage.getItem("User"))._id}`,
+        `/profile/api/v2/${JSON.parse(localStorage.getItem("User"))._id}`,
         {
           headers: {
             authorization:
@@ -40,7 +40,7 @@ class Posts extends Component {
   getPosts = async () => {
     try {
       // console.log(JSON.parse(localStorage.getItem("User")).token);
-      const myPost = await axios.get("posts/myPost", {
+      const myPost = await axios.get("/posts/myPost", {
         headers: {
           authorization:
             "Bearer " + JSON.parse(localStorage.getItem("User")).token,

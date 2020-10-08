@@ -37,15 +37,12 @@ class UserProfile extends Component {
     const { userId } = this.props.computedMatch.params;
     try {
       // console.log(JSON.parse(localStorage.getItem("User")).token);
-      const posts = await axios.get(
-        `http://localhost:5000/posts/userPosts/${userId}`,
-        {
-          headers: {
-            authorization:
-              "Bearer " + JSON.parse(localStorage.getItem("User")).token,
-          },
-        }
-      );
+      const posts = await axios.get(`/posts/userPosts/${userId}`, {
+        headers: {
+          authorization:
+            "Bearer " + JSON.parse(localStorage.getItem("User")).token,
+        },
+      });
       this.setState({ posts: posts.data });
     } catch (error) {
       // M.toast({ html: error.response.data });
