@@ -52,7 +52,10 @@ const userSchema = new Schema(
     },
     resetToken: String,
     expireToken: Date,
-
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
     image: {
       type: String,
       default: function () {
@@ -60,6 +63,10 @@ const userSchema = new Schema(
           ? "https://res.cloudinary.com/connectx/image/upload/v1601755269/Default%20Avatars/female_mcza9a.png"
           : "https://res.cloudinary.com/connectx/image/upload/v1601755269/Default%20Avatars/male_krak66.png";
       },
+    },
+    followed: {
+      type: Boolean,
+      default: false,
     },
 
     gender: {

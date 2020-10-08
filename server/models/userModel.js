@@ -34,6 +34,16 @@ class User {
     });
   };
 
+  verification = (id) => {
+    return new Promise((res, rej) => {
+      userSchema.updateOne({ _id: id }, { isVerified: true }, (err, info) => {
+        if (err) rej(err);
+        const user = userSchema.findOne({ _id: id });
+        res(user);
+      });
+    });
+  };
+
   reset = (email) => {
     return new Promise(async (res, rej) => {
       userSchema.findOne({ email }, (err, info) => {
