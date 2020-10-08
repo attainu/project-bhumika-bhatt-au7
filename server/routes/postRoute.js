@@ -6,6 +6,7 @@ import { Auth } from "../utils";
 const router = Router();
 
 router.get("/", Auth, postController.posts);
+router.get("/userPosts/:id", Auth, postController.userPosts);
 router.post("/createPost", Auth, postController.createPost);
 router.get("/myPost", Auth, postController.myPosts);
 router.get("/onePost/:postId", Auth, postController.onePost);

@@ -1,6 +1,8 @@
 import path from "path";
+import http from "http";
 
 import express, { urlencoded, json } from "express";
+import socketIO from "socket.io";
 import cors from "cors";
 import "dotenv/config";
 
@@ -25,7 +27,8 @@ app.use(express.static(path.join(__dirname, "../build")));
 
 // Server port
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`server is running on port ${PORT}`));
+const server = http.createServer(app);
+server.listen(PORT, () => console.log(`server is running on port ${PORT}`));
 
 app.use("/signup", signupRoute);
 app.use("/login", loginRoute);
@@ -38,11 +41,15 @@ app.use("/", (req, res) => {
   res.send("connect-x server home");
 });
 
-// app.get("/authentication", (req, res) => {
-//   res.redirect("/");
-// });
+// Socket IO
+const io = socketIO(server);
 
-// Invalid path handler
-// app.use((req, res) => {
-//   res.send(`<h1>Error 404! Path not found...<h1>`);
-// });
+io.on("connect", (socket) => {
+  socket.on("room", (id) => {
+    socket.join(id);
+
+    socket.on("text", (text) => {
+      io.to(id).emit("message", text);
+    });
+  });
+});

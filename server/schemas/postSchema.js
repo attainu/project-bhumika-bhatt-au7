@@ -12,7 +12,7 @@ const PostSchema = new Schema(
       type: String,
     },
 
-    likes: [{ type: ObjectId, unique: true, ref: "Users" }],
+    likes: [{ type: ObjectId, ref: "Users" }],
 
     comments: [{ text: String, postedBy: { type: ObjectId, ref: "Users" } }],
 

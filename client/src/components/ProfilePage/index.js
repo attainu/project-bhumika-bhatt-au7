@@ -19,14 +19,28 @@ const profilePage = (props) => {
           </Col>
         ) : (
           <div>
-            <div className="userConnection">
-              {posts || 0} Posts || {user.followers.length} Followers ||{" "}
-              {user.following.length} Following
+            <div className="userConnectionDetails">
+              {(posts && posts.length) || 0} Posts || {user.followers.length}{" "}
+              Followers || {user.following.length} Following
             </div>
             <Row>
               <div className="posts center-align">
                 <Col>
-                  <img
+                  {!props.posts ? (
+                    <Col s={10} offset="s1">
+                      <ProgressBar className="purple" />
+                    </Col>
+                  ) : (
+                    props.posts.map((item) => {
+                      return (
+                        // <div className="post3">
+                        <img className="post3" src={item.file} key={item._id} />
+                        //   <span></span>
+                        // </div>
+                      );
+                    })
+                  )}
+                  {/* <img
                     className="post3"
                     src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
                     alt={userName}
@@ -40,7 +54,7 @@ const profilePage = (props) => {
                     className="post3"
                     src="https://images.unsplash.com/photo-1572177812156-58036aae439c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1500&q=80"
                     alt={userName}
-                  ></img>
+                  ></img> */}
                 </Col>
               </div>
             </Row>

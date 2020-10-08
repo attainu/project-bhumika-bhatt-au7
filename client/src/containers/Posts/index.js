@@ -14,12 +14,12 @@ class Posts extends Component {
     this.getUser();
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevState.posts !== this.state.posts) {
-      this.getPosts();
-      this.getUser();
-    }
-  }
+  // componentDidUpdate(prevProps, prevState) {
+  //   if (prevState.posts !== this.state.posts) {
+  //     this.getPosts();
+  //     this.getUser();
+  //   }
+  // }
 
   getUser = async () => {
     try {
@@ -50,15 +50,22 @@ class Posts extends Component {
       });
       this.setState({ posts: myPost.data });
     } catch (error) {
-      M.toast({ html: error.response.data });
+      // M.toast({ html: error.response.data });
+      console.log(error);
     }
   };
 
   render() {
     const { userName, image } = JSON.parse(localStorage.getItem("User"));
+    const { user, posts } = this.state;
     return (
       <div>
-        <ProfilePage userName={userName} image={image} user={this.state.user} />
+        <ProfilePage
+          userName={userName}
+          image={image}
+          user={this.state.user}
+          posts={this.state.posts}
+        />
       </div>
     );
   }

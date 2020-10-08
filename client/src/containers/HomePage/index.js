@@ -129,7 +129,6 @@ class index extends Component {
       if (posts) {
         // this.setState({ posts: posts.data });
         this.props.posts(posts.data.reverse());
-        console.log(this.state.posts);
       }
     } catch (error) {
       M.toast({ html: error });

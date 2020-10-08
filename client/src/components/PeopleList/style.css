@@ -1,0 +1,24 @@
+.peopleList {
+  border: 1px solid;
+  border-radius: 5px;
+  margin: 0 0 0 30px;
+  width: 180px;
+  box-shadow: 0 0 5px 2px gray;
+  min-height: 100vh;
+  position: fixed;
+  user-select: none;
+}
+
+.peopleImg {
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 0 5px 2px gray;
+  border-radius: 50%;
+  margin: 15px 10px -15px 15px;
+  border: 1px solid;
+}
+
+.people {
+  margin: 5px;
+  cursor: pointer;
+}

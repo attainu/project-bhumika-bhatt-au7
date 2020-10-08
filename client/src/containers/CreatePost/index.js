@@ -101,12 +101,13 @@ class createPost extends Component {
 
   uploadFile = async () => {
     const { formdata } = this.state;
+    const { _id } = JSON.parse(localStorage.getItem("User"));
 
     if (formdata.file) {
       try {
         const fileData = new FormData();
         fileData.append("file", formdata.file);
-        fileData.append("folder", "Posts");
+        fileData.append("folder", `Posts/${_id}`);
         fileData.append("upload_preset", "connectX");
         fileData.append("cloud_name", "connectx");
         const file = await axios.post(

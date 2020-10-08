@@ -6,10 +6,12 @@ import { UserProfilePage } from "../../components";
 class UserProfile extends Component {
   state = {
     userPosts: null,
+    posts: null,
     showFollow: true,
   };
   componentDidMount = async () => {
     this.getUser();
+    this.getPosts();
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -27,6 +29,26 @@ class UserProfile extends Component {
       });
       this.setState({ userPosts: userPost.data });
     } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getPosts = async () => {
+    const { userId } = this.props.computedMatch.params;
+    try {
+      // console.log(JSON.parse(localStorage.getItem("User")).token);
+      const posts = await axios.get(
+        `http://localhost:5000/posts/userPosts/${userId}`,
+        {
+          headers: {
+            authorization:
+              "Bearer " + JSON.parse(localStorage.getItem("User")).token,
+          },
+        }
+      );
+      this.setState({ posts: posts.data });
+    } catch (error) {
+      // M.toast({ html: error.response.data });
       console.log(error);
     }
   };
@@ -88,6 +110,7 @@ class UserProfile extends Component {
       <div>
         <UserProfilePage
           // posts={this.state.userPosts.posts}
+          posts={this.state.posts}
           user={this.state.userPosts}
           follow={this.followUser}
           unfollow={this.unfollowUser}
