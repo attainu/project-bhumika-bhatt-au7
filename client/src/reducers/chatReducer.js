@@ -1,4 +1,8 @@
-import { GET_ROOM_ID, GET_CHAT_MESSAGE } from "../configs/actionTypes";
+import {
+  GET_ROOM_ID,
+  GET_CHAT_MESSAGE,
+  GET_CHAT_USER,
+} from "../configs/actionTypes";
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -11,6 +15,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         message: action.message,
+      };
+    case GET_CHAT_USER:
+      return {
+        ...state,
+        chatUser: action.chatUser,
       };
     default:
       return { ...state };

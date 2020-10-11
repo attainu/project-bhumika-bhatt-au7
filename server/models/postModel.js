@@ -71,7 +71,7 @@ class Post {
       postSchema
         .findByIdAndUpdate(
           like.postId,
-          { $push: { likes: userId } },
+          { $addToSet: { likes: userId } },
           {
             new: true,
           }

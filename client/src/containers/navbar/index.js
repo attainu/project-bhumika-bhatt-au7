@@ -56,9 +56,13 @@ class Navbar extends Component {
 
   closeSearch = () => {
     this.setState({
-      searchView: false,
       searchValue: "",
     });
+    setTimeout(() => {
+      this.setState({
+        searchView: false,
+      });
+    }, 1000);
   };
 
   closeSearchBar = () => {

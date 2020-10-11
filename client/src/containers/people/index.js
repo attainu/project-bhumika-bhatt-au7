@@ -7,7 +7,6 @@ class People extends Component {
   state = {
     user: null,
     followers: [],
-    room: null,
   };
 
   async componentDidMount() {
@@ -54,8 +53,8 @@ class People extends Component {
   };
 
   render() {
-    const { followers } = this.state;
-    return <PeopleList followers={followers} openChat={this.openChat} />;
+    const { followers, user } = this.state;
+    return <PeopleList followers={followers} user={user} />;
   }
 }
 

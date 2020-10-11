@@ -79,8 +79,8 @@ class Profile {
 
     return new Promise(async (res, rej) => {
       const room = roomId() || Math.random(36).toString().slice(2);
-      userSchema.findByIdAndUpdate(
-        followId,
+      userSchema.update(
+        { _id: followId, "followers.user": { $ne: user._id } },
         {
           $push: {
             followers: {
@@ -95,8 +95,8 @@ class Profile {
             rej(err);
           }
           userSchema
-            .findByIdAndUpdate(
-              user._id,
+            .update(
+              { _id: user._id, "following.user": { $ne: followId } },
               {
                 $push: { following: followId },
               },

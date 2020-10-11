@@ -13,6 +13,7 @@ class Chat extends Component {
     text: "",
     chatUser: "",
     message: "",
+    roomId: "",
     previousMessage: [],
   };
 
@@ -28,7 +29,8 @@ class Chat extends Component {
     if (this.props.chatRoom) {
       this.setState({
         previousMessage: this.props.chatRoom.message,
-        chatUser: this.props.chatRoom.roomId.firstName,
+        roomId: this.props.chatRoom.roomId,
+        chatUser: this.props.chatRoom.chatUser.firstName,
       });
     }
   };
@@ -43,7 +45,6 @@ class Chat extends Component {
   getMessage = async () => {
     try {
       const response = await axios.get(`chat/api/v2/${this.state.roomId}`);
-
       if (response) {
         this.setState({
           previousMessage: response.data,
@@ -57,13 +58,16 @@ class Chat extends Component {
   sendMessage = (e) => {
     e.preventDefault();
 
-    socket.emit("text", { user: user.firstName, text: this.state.text });
-    socket.on("message", (data) => {
-      this.setState({
-        text: "",
+    const text = this.state.text;
+    if (text.length >= 1) {
+      socket.emit("text", { user: user.firstName, text: text });
+      socket.on("message", (data) => {
+        this.setState({
+          text: "",
+        });
+        this.getMessage();
       });
-      this.getMessage();
-    });
+    }
   };
 
   updateScroll = () => {

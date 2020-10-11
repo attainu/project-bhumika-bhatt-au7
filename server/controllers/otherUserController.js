@@ -11,10 +11,8 @@ const otherUserController = {
   },
 
   search: async (req, res) => {
-    console.log(req.body);
     try {
       const users = await otherUser.search(req.body.query);
-      console.log(users);
       res.status(200).json(users);
     } catch (error) {
       res.status(400).send(error._message);

@@ -1,5 +1,5 @@
 import React from "react";
-import { TextInput } from "react-materialize";
+import { Button, TextInput } from "react-materialize";
 import _ from "lodash";
 
 import "./style.css";
@@ -15,7 +15,12 @@ const ChatLayout = (props) => {
   } = props;
 
   return (
-    <div className="chatCont white">
+    <div
+      className="chatCont white"
+      onBlur={(e) => {
+        e.currentTarget.className = "chatCont white";
+      }}
+    >
       {chatUser}
       <i
         style={{ float: "right", cursor: "pointer" }}
@@ -49,6 +54,7 @@ const ChatLayout = (props) => {
           onChange={inputHandler}
           noLayout
           placeholder="Write your text here"
+          autoFocus
         ></TextInput>
       </form>
     </div>

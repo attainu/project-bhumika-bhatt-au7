@@ -46,7 +46,6 @@ const ResetPassword = (props) => {
               label="Confirm Password"
               ref={confirmPasswordRef}
               required
-              autoFocus
               s={12}
             />
             <div className="error">

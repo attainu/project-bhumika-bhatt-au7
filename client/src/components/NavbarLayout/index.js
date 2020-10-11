@@ -61,41 +61,33 @@ const NavbarLayout = (props) => {
           value={searchValue}
           placeholder="Search"
           onChange={search}
+          onBlur={closeSearch}
         />
         {searchView && (
           <div>
             {userInfo && userInfo.length < 1 ? (
               <ProgressBar className="purple" />
             ) : (
-              <div>
-                <i
-                  id="closeSearch"
-                  className="material-icons"
-                  onClick={closeSearch}
-                >
-                  close
-                </i>
-                <div className="collection">
-                  {userInfo
-                    ? userInfo.map((item) => {
-                        return (
-                          <div key={item._id}>
-                            <Link
-                              to={
-                                item._id === user._id
-                                  ? `/profile`
-                                  : `/profile/${item._id}`
-                              }
-                              className="collection-item"
-                              onClick={close}
-                            >
-                              {item.email}
-                            </Link>
-                          </div>
-                        );
-                      })
-                    : null}
-                </div>
+              <div className="collection">
+                {userInfo
+                  ? userInfo.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <Link
+                            to={
+                              item._id === user._id
+                                ? `/profile`
+                                : `/profile/${item._id}`
+                            }
+                            className="collection-item"
+                            onClick={close}
+                          >
+                            {item.email}
+                          </Link>
+                        </div>
+                      );
+                    })
+                  : null}
               </div>
             )}
           </div>

@@ -90,7 +90,6 @@ const userController = {
   },
 
   verification: async (req, res) => {
-    console.log(req.params);
     try {
       // Verify email account
       const verified = jwt.verify(req.params.token, process.env.SECRET_KEY);
@@ -148,6 +147,7 @@ const userController = {
       user.password = password;
       user.resetToken = undefined;
       user.expireToken = undefined;
+      user.save();
       res.json({ message: "Password changed successfully" });
     } catch (error) {
       console.dir(error);

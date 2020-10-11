@@ -24,14 +24,14 @@ const userProfile = (props) => {
           <div className="userConnection">
             {show ? (
               <button
-                className="btn waves-effect waves-light blue darker larger"
+                className="btn waves-effect waves-light purple darken-2 larger"
                 onClick={() => props.follow()}
               >
                 Follow
               </button>
             ) : (
               <button
-                className="btn waves-effect waves-light blue darker larger"
+                className="btn waves-effect waves-light purple darken-2 larger"
                 onClick={() => props.unfollow()}
               >
                 UnFollow

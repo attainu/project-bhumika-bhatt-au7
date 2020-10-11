@@ -23,11 +23,18 @@ class UserProfile extends Component {
 
   getUser = async () => {
     const { userId } = this.props.computedMatch.params;
-    const { token } = JSON.parse(localStorage.getItem("User"));
+    const { token, _id } = JSON.parse(localStorage.getItem("User"));
     try {
       const userPost = await axios.get(`/user/${userId}`, {
         headers: { authorization: "Bearer " + token },
       });
+      for (let elm of userPost.data.followers) {
+        if (elm.user === _id) {
+          this.setState({
+            showFollow: false,
+          });
+        }
+      }
       this.setState({ userPosts: userPost.data });
     } catch (error) {
       console.log(error);
