@@ -33,6 +33,10 @@ class UserProfile extends Component {
           this.setState({
             showFollow: false,
           });
+        } else {
+          this.setState({
+            showFollow: true,
+          });
         }
       }
       this.setState({ userPosts: userPost.data });
