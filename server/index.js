@@ -57,7 +57,7 @@ io.on("connect", (socket) => {
         user: data.user,
         message: data.text,
       };
-      io.to(id).emit("message", message);
+      io.in(id).emit("message", message);
       await chatController.create(message);
     });
   });

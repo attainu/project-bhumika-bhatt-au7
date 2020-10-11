@@ -94,9 +94,7 @@ class Authentication extends Component {
         this.setState({
           error: response.data.message,
         });
-      }
-      // console.log(response.data.message);
-      else {
+      } else {
         localStorage.setItem("User", JSON.stringify(response.data));
 
         this.props.login(response.data);
@@ -147,18 +145,15 @@ class Authentication extends Component {
   resetPassword = async (e) => {
     e.preventDefault();
     const { loginFormData } = this.state;
-    const { history } = this.props;
     const email = loginFormData.loginEmail;
     if (!email) {
-      return M.toast({ html: "Please enter the email to reset the password!" });
+      this.setState({ error: "Please enter the email to reset the password!" });
     }
     try {
       const response = await axios.post("/login/reset", {
         email: loginFormData.loginEmail,
       });
-      console.log(response.data.message);
       M.toast({ html: response.data.message });
-      // history.push(WEB_URL.AUTHENTICATION);
     } catch (error) {
       this.setState({
         error: error.response.data,

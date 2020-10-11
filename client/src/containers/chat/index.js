@@ -1,28 +1,39 @@
 import React, { Component } from "react";
-import io from "socket.io-client";
+import { connect } from "react-redux";
 import axios from "axios";
 
 import { ChatLayout } from "../../components";
+import { isEqual } from "lodash";
+import socket from "../../configs/socket";
 
-const socket = io();
-const room = "room";
 const user = JSON.parse(localStorage.getItem("User"));
-socket.emit("room", room);
 
 class Chat extends Component {
   state = {
     text: "",
+    chatUser: "",
     message: "",
+    roomId: "",
     previousMessage: [],
   };
 
-  componentDidMount() {
-    this.getMessage();
+  componentDidUpdate(prevProps) {
+    if (!isEqual(this.props, prevProps)) {
+      this.updateState();
+    }
+
+    this.updateScroll();
   }
 
-  componentDidUpdate() {
-    this.getMessage();
-  }
+  updateState = () => {
+    if (this.props.chatRoom) {
+      this.setState({
+        previousMessage: this.props.chatRoom.message,
+        roomId: this.props.chatRoom.roomId,
+        chatUser: this.props.chatRoom.chatUser.firstName,
+      });
+    }
+  };
 
   inputHandler = (e) => {
     const value = e.target.value;
@@ -33,12 +44,10 @@ class Chat extends Component {
 
   getMessage = async () => {
     try {
-      const response = await axios.get(`chat/api/v2/${room}`);
-
+      const response = await axios.get(`chat/api/v2/${this.state.roomId}`);
       if (response) {
         this.setState({
           previousMessage: response.data,
-          message: [],
         });
       }
     } catch (error) {
@@ -48,15 +57,17 @@ class Chat extends Component {
 
   sendMessage = (e) => {
     e.preventDefault();
-    socket.emit("text", { user: user.firstName, text: this.state.text });
 
-    socket.on("message", (data) => {
-      this.setState({
-        message: data,
-        text: "",
+    const text = this.state.text;
+    if (text.length >= 1) {
+      socket.emit("text", { user: user.firstName, text: text });
+      socket.on("message", (data) => {
+        this.setState({
+          text: "",
+        });
+        this.getMessage();
       });
-    });
-    this.updateScroll();
+    }
   };
 
   updateScroll = () => {
@@ -72,9 +83,16 @@ class Chat extends Component {
         sendMessage={this.sendMessage}
         message={this.state.message}
         previousMessage={this.state.previousMessage}
+        chatUser={this.state.chatUser}
       />
     );
   }
 }
 
-export default Chat;
+const mapStateToProps = (state) => {
+  return {
+    chatRoom: state.chatRoom,
+  };
+};
+
+export default connect(mapStateToProps)(Chat);

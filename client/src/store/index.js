@@ -13,6 +13,4 @@ const store = createStore(
   composeEnhancers(applyMiddleware(thunkMiddleware))
 );
 
-// store.subscribe(() => console.log(store.getState()));
-
 export default store;

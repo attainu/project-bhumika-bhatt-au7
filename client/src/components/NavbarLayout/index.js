@@ -1,11 +1,11 @@
 import React from "react";
-import { Navbar, Icon, Dropdown } from "react-materialize";
+import { Navbar, Icon, Dropdown, ProgressBar } from "react-materialize";
 import { Link } from "react-router-dom";
 
 import "./style.scss";
 import Sidenav from "./sidenav";
 
-const navbar = (props) => {
+const NavbarLayout = (props) => {
   const {
     showHomepage,
     showProfile,
@@ -14,6 +14,9 @@ const navbar = (props) => {
     search,
     close,
     userInfo,
+    closeSearch,
+    searchView,
+    searchValue,
   } = props;
   const user = JSON.parse(localStorage.getItem("User"));
   return (
@@ -54,30 +57,41 @@ const navbar = (props) => {
         <input
           className="browser-default search"
           type="text"
+          name="searchValue"
+          value={searchValue}
           placeholder="Search"
           onChange={search}
+          onBlur={closeSearch}
         />
-        <div className="collection">
-          {userInfo
-            ? userInfo.map((item) => {
-                return (
-                  <div key={item._id}>
-                    <Link
-                      to={
-                        item._id === user._id
-                          ? `/profile`
-                          : `/profile/${item._id}`
-                      }
-                      className="collection-item"
-                      onClick={close}
-                    >
-                      {item.email}
-                    </Link>
-                  </div>
-                );
-              })
-            : null}
-        </div>
+        {searchView && (
+          <div>
+            {userInfo && userInfo.length < 1 ? (
+              <ProgressBar className="purple" />
+            ) : (
+              <div className="collection">
+                {userInfo
+                  ? userInfo.map((item) => {
+                      return (
+                        <div key={item._id}>
+                          <Link
+                            to={
+                              item._id === user._id
+                                ? `/profile`
+                                : `/profile/${item._id}`
+                            }
+                            className="collection-item"
+                            onClick={close}
+                          >
+                            {item.email}
+                          </Link>
+                        </div>
+                      );
+                    })
+                  : null}
+              </div>
+            )}
+          </div>
+        )}
       </form>
 
       <Dropdown
@@ -117,4 +131,4 @@ const navbar = (props) => {
   );
 };
 
-export default navbar;
+export default NavbarLayout;

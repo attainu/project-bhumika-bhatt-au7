@@ -68,17 +68,16 @@ const postController = {
     }
   },
   deletePost: async (req, res) => {
-    console.log(req.params.postId);
     try {
       const post = await Post.deletedPost(req.params.postId);
       if (!post) {
-        return res.status(404).json({ message: "post not found" });
+        return res.status(404).json({ message: "Post not found" });
       }
       if (post.postedBy._id.toString() === req.user._id.toString()) {
         await post.remove();
         return res.json(post);
       } else {
-        console.log("not deleted");
+        console.log("Not deleted");
       }
     } catch (error) {
       res.status(400).send(error._message);

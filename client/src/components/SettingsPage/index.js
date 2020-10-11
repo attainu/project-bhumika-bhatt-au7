@@ -33,6 +33,7 @@ const SettingsPage = (props) => {
     selectTab,
     showPasswordForm,
     changePassword,
+    fileName,
   } = props;
 
   return (
@@ -61,9 +62,14 @@ const SettingsPage = (props) => {
             <img id="dp2" src={image} alt={userName}></img>
             <span>Email: {email}</span>
           </div>
-          <label className="edit" htmlFor="upload">
-            CHANGE IMAGE
-          </label>
+          {!showPasswordForm && (
+            <div>
+              <label className="edit" htmlFor="upload">
+                CHANGE IMAGE
+              </label>
+              <span id="file2">{fileName}</span>
+            </div>
+          )}
           <input id="upload" type="file" onChange={inputHandlerFile}></input>
 
           {!showPasswordForm ? (

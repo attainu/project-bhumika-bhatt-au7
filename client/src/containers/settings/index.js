@@ -23,6 +23,7 @@ class Settings extends Component {
       gender: this.user.gender,
     },
     file: "",
+    fileName: "",
     showPasswordForm: false,
   };
 
@@ -86,6 +87,7 @@ class Settings extends Component {
   inputHandlerFile = (e) => {
     this.setState({
       file: e.target.files[0],
+      fileName: e.target.files[0].name,
     });
   };
 
@@ -109,6 +111,9 @@ class Settings extends Component {
 
       if (response) {
         this.getUserProfile();
+        this.setState({
+          fileName: "",
+        });
         M.toast({ html: "User details successfully updated!" });
         history.push(WEB_URL.SETTINGS);
       }
@@ -192,7 +197,7 @@ class Settings extends Component {
         console.log("Cloudinary-error:", error);
       }
     } else {
-      return "";
+      return user.image;
     }
   };
 
@@ -216,6 +221,7 @@ class Settings extends Component {
         newPasswordRef={this.newPasswordRef}
         confirmPasswordRef={this.confirmPasswordRef}
         selectTab={this.selectTab}
+        fileName={this.state.fileName}
       />
     );
   }

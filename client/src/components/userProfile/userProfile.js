@@ -24,14 +24,14 @@ const userProfile = (props) => {
           <div className="userConnection">
             {show ? (
               <button
-                className="btn waves-effect waves-light blue darker larger"
+                className="btn waves-effect waves-light purple darken-2 larger"
                 onClick={() => props.follow()}
               >
                 Follow
               </button>
             ) : (
               <button
-                className="btn waves-effect waves-light blue darker larger"
+                className="btn waves-effect waves-light purple darken-2 larger"
                 onClick={() => props.unfollow()}
               >
                 UnFollow
@@ -53,10 +53,12 @@ const userProfile = (props) => {
                 ) : (
                   props.posts.map((item) => {
                     return (
-                      // <div className="post3">
-                      <img className="post3" src={item.file} key={item._id} />
-                      //   <span></span>
-                      // </div>
+                      <img
+                        className="post3"
+                        src={item.file}
+                        key={item._id}
+                        alt="Error fetching the post"
+                      />
                     );
                   })
                 )}

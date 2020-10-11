@@ -68,12 +68,26 @@ class Profile {
     });
   };
 
-  updateUserFollowing = (followId, userId) => {
+  updateUserFollowing = (followId, user) => {
+    const roomId = () => {
+      for (let elm of user.followers) {
+        if (elm.user.toString() === followId.toString()) {
+          return elm.roomId;
+        }
+      }
+    };
+
     return new Promise(async (res, rej) => {
-      userSchema.findByIdAndUpdate(
-        followId,
+      const room = roomId() || Math.random(36).toString().slice(2);
+      userSchema.updateOne(
+        { _id: followId, "followers.user": { $ne: user._id } },
         {
-          $push: { followers: userId },
+          $push: {
+            followers: {
+              user: user._id,
+              roomId: room,
+            },
+          },
         },
         { new: true },
         (err, info) => {
@@ -81,8 +95,8 @@ class Profile {
             rej(err);
           }
           userSchema
-            .findByIdAndUpdate(
-              userId,
+            .updateOne(
+              { _id: user._id, "following.user": { $ne: followId } },
               {
                 $push: { following: followId },
               },
@@ -106,7 +120,7 @@ class Profile {
       userSchema.findByIdAndUpdate(
         unfollowId,
         {
-          $pull: { followers: userId },
+          $pull: { followers: { user: userId } },
         },
         { new: true },
         (err, info) => {

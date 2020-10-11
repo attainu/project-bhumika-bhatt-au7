@@ -71,7 +71,7 @@ const profileController = {
     try {
       const info = await Profile.updateUserFollowing(
         req.body.followId,
-        req.user._id
+        req.user
       );
       res.status(200).json({ info });
     } catch (error) {

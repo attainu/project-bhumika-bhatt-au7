@@ -90,14 +90,11 @@ const userController = {
   },
 
   verification: async (req, res) => {
-    console.log(req.params);
     try {
       // Verify email account
       const verified = jwt.verify(req.params.token, process.env.SECRET_KEY);
       const user = await User.verification(verified._id);
-      res.send(
-        `<h4>Email Verification success, Please continue to login!!! click here to login <a href="http://localhost:3000">Login</a></h>`
-      );
+      res.redirect("https://connectxapp.herokuapp.com/");
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);
@@ -122,13 +119,13 @@ const userController = {
             to: user.email,
             from: "connectxapp@gmail.com",
             subject: "Reset Password",
-            html: `<h3>Hello <mark>${user.firstName} ${user.lastName}!!</mark>. You requested for Password reset</h3>
-              <h5>click on this <a href="http://localhost:3000/reset/${resetToken}">link</a> to reset Password</h5>`,
+            html: `<h3>Hello <mark>${user.firstName} ${user.lastName}</mark>. You requested for Password reset</h3>
+              <h5>click on this <a href="https://connectxapp.herokuapp.com/reset/${resetToken}">link</a> to reset Password</h5>`,
           });
         }
       });
       res.json({
-        message: "Please check your registered email to reset the password !",
+        message: "Please check your registered email to reset the password!",
       });
     } catch (error) {
       console.dir(error);
@@ -148,7 +145,8 @@ const userController = {
       user.password = password;
       user.resetToken = undefined;
       user.expireToken = undefined;
-      res.json({ message: "Password changed successfully" });
+      user.save();
+      res.json({ message: "Password changed successfully!" });
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);

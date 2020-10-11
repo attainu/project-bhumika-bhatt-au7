@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import M from "materialize-css";
 
 import { getPost } from "../../actions";
 import { Homepage } from "../../components";
@@ -18,8 +17,6 @@ class index extends Component {
     this.getPosts();
   };
 
-  componentDidUpdate = () => {};
-
   likePost = async (postId) => {
     try {
       const likes = await axios.put(
@@ -32,17 +29,7 @@ class index extends Component {
           },
         }
       );
-      // const newData = this.props.allPost.map((item) => {
-      //   if (item._id === likes.data.likes._id) {
-      //     return likes;
-      //   } else {
-      //     return item;
-      //   }
-      // });
-      // console.log(newData);
-
-      // this.props.posts(newData);
-      this.getPosts();
+      if (likes) this.getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -60,15 +47,7 @@ class index extends Component {
           },
         }
       );
-      // const newData = this.props.allPost.map((item) => {
-      //   if (item._id === likes._id) {
-      //     return likes;
-      //   } else {
-      //     return item;
-      //   }
-      // });
-      // this.props.posts(newData);
-      this.getPosts();
+      if (likes) this.getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -86,15 +65,7 @@ class index extends Component {
           },
         }
       );
-      // const newData = this.props.allPost.map((item) => {
-      //   if (item._id === comments._id) {
-      //     return comments;
-      //   } else {
-      //     return item;
-      //   }
-      // });
-      // this.props.posts(newData);
-      this.getPosts();
+      if (comments) this.getPosts();
     } catch (error) {
       console.log(error);
     }
@@ -127,11 +98,10 @@ class index extends Component {
         },
       });
       if (posts) {
-        // this.setState({ posts: posts.data });
         this.props.posts(posts.data.reverse());
       }
     } catch (error) {
-      M.toast({ html: error });
+      console.log("Get post error:", error);
     }
   };
 

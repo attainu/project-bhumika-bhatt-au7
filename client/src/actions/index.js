@@ -1,3 +1,3 @@
 export * from "./loginAction";
 export * from "./postAction";
-export * from "./roomAction";
+export * from "./chatAction";

@@ -13,6 +13,7 @@ const userSchema = new Schema(
     lastName: {
       type: String,
       maxlength: 100,
+      default: "",
     },
 
     email: {
@@ -41,14 +42,14 @@ const userSchema = new Schema(
 
     country: {
       type: String,
-      min: 3,
       maxlength: 100,
+      default: "",
     },
 
     mobile: {
       type: String,
-      minlength: 10,
       maxlength: 15,
+      default: "",
     },
     resetToken: String,
     expireToken: Date,
@@ -73,7 +74,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    followers: [{ type: ObjectId, ref: "Users" }],
+    followers: [{ user: { type: ObjectId, ref: "Users" }, roomId: String }],
     following: [{ type: ObjectId, ref: "Users" }],
   },
   { versionKey: false, timestamps: true }

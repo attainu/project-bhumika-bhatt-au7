@@ -5,10 +5,23 @@ import _ from "lodash";
 import "./style.css";
 
 const ChatLayout = (props) => {
-  const { text, inputHandler, sendMessage, message, previousMessage } = props;
+  const {
+    text,
+    inputHandler,
+    sendMessage,
+    message,
+    previousMessage,
+    chatUser,
+  } = props;
 
   return (
-    <div className="chatCont white">
+    <div
+      className="chatCont white"
+      onBlur={(e) => {
+        e.currentTarget.className = "chatCont white";
+      }}
+    >
+      {chatUser}
       <i
         style={{ float: "right", cursor: "pointer" }}
         className="material-icons"
@@ -41,6 +54,7 @@ const ChatLayout = (props) => {
           onChange={inputHandler}
           noLayout
           placeholder="Write your text here"
+          autoFocus
         ></TextInput>
       </form>
     </div>

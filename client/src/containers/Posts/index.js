@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import M from "materialize-css";
 
 import { ProfilePage } from "../../components";
 
@@ -13,13 +12,6 @@ class Posts extends Component {
     this.getPosts();
     this.getUser();
   };
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.posts !== this.state.posts) {
-  //     this.getPosts();
-  //     this.getUser();
-  //   }
-  // }
 
   getUser = async () => {
     try {
@@ -39,8 +31,7 @@ class Posts extends Component {
 
   getPosts = async () => {
     try {
-      // console.log(JSON.parse(localStorage.getItem("User")).token);
-      const myPost = await axios.get("/posts/myPost", {
+      const myPost = await axios.get("posts/myPost", {
         headers: {
           authorization:
             "Bearer " + JSON.parse(localStorage.getItem("User")).token,
@@ -48,14 +39,12 @@ class Posts extends Component {
       });
       this.setState({ posts: myPost.data });
     } catch (error) {
-      // M.toast({ html: error.response.data });
       console.log(error);
     }
   };
 
   render() {
     const { userName, image } = JSON.parse(localStorage.getItem("User"));
-    const { user, posts } = this.state;
     return (
       <div>
         <ProfilePage

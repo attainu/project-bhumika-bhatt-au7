@@ -17,16 +17,28 @@ class UserProfile extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.userPosts !== this.state.userPosts) {
       this.getUser();
+      this.getPosts();
     }
   }
 
   getUser = async () => {
     const { userId } = this.props.computedMatch.params;
-    const { token } = JSON.parse(localStorage.getItem("User"));
+    const { token, _id } = JSON.parse(localStorage.getItem("User"));
     try {
       const userPost = await axios.get(`/user/${userId}`, {
         headers: { authorization: "Bearer " + token },
       });
+      for (let elm of userPost.data.followers) {
+        if (elm.user === _id) {
+          this.setState({
+            showFollow: false,
+          });
+        } else {
+          this.setState({
+            showFollow: true,
+          });
+        }
+      }
       this.setState({ userPosts: userPost.data });
     } catch (error) {
       console.log(error);
@@ -36,7 +48,6 @@ class UserProfile extends Component {
   getPosts = async () => {
     const { userId } = this.props.computedMatch.params;
     try {
-      // console.log(JSON.parse(localStorage.getItem("User")).token);
       const posts = await axios.get(`/posts/userPosts/${userId}`, {
         headers: {
           authorization:
@@ -45,7 +56,6 @@ class UserProfile extends Component {
       });
       this.setState({ posts: posts.data });
     } catch (error) {
-      // M.toast({ html: error.response.data });
       console.log(error);
     }
   };
@@ -61,13 +71,11 @@ class UserProfile extends Component {
           headers: { authorization: "Bearer " + token },
         }
       );
-      console.log(user);
       localStorage.setItem("user", JSON.stringify(user.data.info));
       this.setState((prevState) => {
         const newFollower = prevState.userPosts.followers.filter(
           (item) => item !== user.data.info._id
         );
-        console.log(newFollower);
         return {
           ...prevState,
           user: {
@@ -106,7 +114,6 @@ class UserProfile extends Component {
     return (
       <div>
         <UserProfilePage
-          // posts={this.state.userPosts.posts}
           posts={this.state.posts}
           user={this.state.userPosts}
           follow={this.followUser}
