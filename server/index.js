@@ -40,7 +40,7 @@ app.use("/chat", chatRoute);
 
 // Homepage
 app.use("/", (req, res) => {
-  res.send("connect-x server home");
+  res.redirect("/");
 });
 
 // Socket IO
