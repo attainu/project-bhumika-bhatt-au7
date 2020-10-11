@@ -12,6 +12,7 @@ class createPost extends Component {
     formdata: {
       description: "",
       file: "",
+      fileName: "",
     },
   };
 
@@ -24,6 +25,7 @@ class createPost extends Component {
     const value = e.target.value;
     const { formdata } = this.state;
     this.setState({
+      error: "",
       formdata: { ...formdata, [name]: value },
     });
   };
@@ -31,7 +33,12 @@ class createPost extends Component {
   inputHandlerFile = (e) => {
     const { formdata } = this.state;
     this.setState({
-      formdata: { ...formdata, file: e.target.files[0] },
+      error: "",
+      formdata: {
+        ...formdata,
+        file: e.target.files[0],
+        fileName: e.target.files[0].name,
+      },
     });
   };
 
@@ -88,7 +95,8 @@ class createPost extends Component {
 
       if (response) {
         this.setState({
-          formdata: { description: "" },
+          error: "",
+          formdata: { description: "", file: "", fileName: "" },
         });
         M.toast({ html: "Post successfull!" });
         this.getPosts();

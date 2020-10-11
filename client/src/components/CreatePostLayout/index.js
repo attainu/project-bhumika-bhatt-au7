@@ -9,7 +9,7 @@ const CreatePostLayout = (props) => {
     submitHandler,
     inputHandler,
     inputHandlerFile,
-    formdata: { description },
+    formdata: { description, fileName },
   } = props;
 
   return (
@@ -36,10 +36,13 @@ const CreatePostLayout = (props) => {
         >
           Post
         </Button>
-        <label className="edit2" htmlFor="upload2">
-          CHOOSE FILE
-        </label>
-        <input id="upload2" onChange={inputHandlerFile} type="file"></input>
+        <div>
+          <label className="edit2" htmlFor="upload2">
+            CHOOSE FILE
+          </label>
+          <input id="upload2" onChange={inputHandlerFile} type="file"></input>
+          <span id="file">{fileName}</span>
+        </div>
       </Row>
     </div>
   );
