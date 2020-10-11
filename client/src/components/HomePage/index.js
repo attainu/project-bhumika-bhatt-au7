@@ -124,12 +124,14 @@ const Homepage = (props) => {
           })
         )}
       </Col>
-      <Col offset="l1">
-        <Chat />
-      </Col>
-      <Col offset="l1">
-        <People />
-      </Col>
+      <div className="hide-on-med-and-down">
+        <Col offset="l1">
+          <Chat />
+        </Col>
+        <Col offset="l1">
+          <People />
+        </Col>
+      </div>
     </Row>
   );
 };

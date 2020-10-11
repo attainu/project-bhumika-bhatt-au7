@@ -17,6 +17,7 @@ class UserProfile extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.userPosts !== this.state.userPosts) {
       this.getUser();
+      this.getPosts();
     }
   }
 
