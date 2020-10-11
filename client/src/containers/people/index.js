@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import axios from "axios";
 
 import { PeopleList } from "../../components";
-import { getRoom } from "../../actions";
 
 class People extends Component {
   state = {
@@ -17,18 +16,10 @@ class People extends Component {
     await this.getFollowers(followers);
   }
 
-  selectUser = (e) => {
-    document.getElementsByClassName("chatCont")[0].className += " chatActive";
-
-    console.log(e);
-  };
-
   getUser = async () => {
     try {
       const User = await axios.get(
-        `http://localhost:5000/profile/api/v2/${
-          JSON.parse(localStorage.getItem("User"))._id
-        }`,
+        `/profile/api/v2/${JSON.parse(localStorage.getItem("User"))._id}`,
         {
           headers: {
             authorization:
@@ -44,17 +35,14 @@ class People extends Component {
   };
 
   getFollowers = async (followers) => {
-    for (let id of followers) {
+    for (let data of followers) {
       try {
-        const User = await axios.get(
-          `http://localhost:5000/profile/api/v2/${id}`,
-          {
-            headers: {
-              authorization:
-                "Bearer " + JSON.parse(localStorage.getItem("User")).token,
-            },
-          }
-        );
+        const User = await axios.get(`/profile/api/v2/${data.user}`, {
+          headers: {
+            authorization:
+              "Bearer " + JSON.parse(localStorage.getItem("User")).token,
+          },
+        });
 
         const { followers } = this.state;
 
@@ -67,14 +55,8 @@ class People extends Component {
 
   render() {
     const { followers } = this.state;
-    return <PeopleList followers={followers} selectUser={this.selectUser} />;
+    return <PeopleList followers={followers} openChat={this.openChat} />;
   }
 }
-
-const dispatchStateToProps = (dispatch) => {
-  return {
-    room: (room) => dispatch(getRoom(room)),
-  };
-};
 
 export default People;

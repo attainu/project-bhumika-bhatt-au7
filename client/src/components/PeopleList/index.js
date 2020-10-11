@@ -1,13 +1,16 @@
 import React from "react";
-import io from "socket.io-client";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 import _ from "lodash";
 
 import "./style.css";
-
-export const socket = io();
+import { getMessage, getRoomId } from "../../actions";
+import socket from "../../configs/socket";
 
 const PeopleList = (props) => {
+  const dispatch = useDispatch();
   const { followers } = props;
+  const user = JSON.parse(localStorage.getItem("User"));
   return (
     <div className="peopleList white">
       {followers &&
@@ -16,9 +19,29 @@ const PeopleList = (props) => {
             <div
               key={idx}
               className="people"
-              onClick={(e) => {
+              onClick={async (e) => {
                 document.getElementsByClassName("chatCont")[0].className +=
                   " chatActive";
+
+                socket.disconnect();
+                for (let elm of follower.followers) {
+                  if (elm.user.toString() === user._id.toString()) {
+                    socket.connect();
+                    socket.emit("room", elm.roomId);
+                    dispatch(getRoomId(follower));
+                    try {
+                      const response = await axios.get(
+                        `chat/api/v2/${elm.roomId}`
+                      );
+
+                      if (response) {
+                        dispatch(getMessage(response.data));
+                      }
+                    } catch (error) {
+                      console.log(error);
+                    }
+                  }
+                }
               }}
             >
               <img

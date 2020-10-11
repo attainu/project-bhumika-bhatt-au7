@@ -73,7 +73,7 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    followers: [{ type: ObjectId, ref: "Users" }],
+    followers: [{ user: { type: ObjectId, ref: "Users" }, roomId: String }],
     following: [{ type: ObjectId, ref: "Users" }],
   },
   { versionKey: false, timestamps: true }
