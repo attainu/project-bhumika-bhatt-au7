@@ -45,35 +45,6 @@ class createPost extends Component {
   submitHandler = async (e) => {
     e.preventDefault();
 
-    // const { formdata } = this.state;
-    // try {
-    //   const fileData = new FormData();
-    //   fileData.append("file", formdata.photo);
-    //   fileData.append("upload_preset", "connectX");
-    //   fileData.append("cloud_name", "connectx");
-    //   const file = await axios.post(
-    //     "https://api.cloudinary.com/v1_1/connectx/image/upload",
-    //     fileData
-    //   );
-    //   this.setState({ formdata: { ...formdata, url: file.data.url } });
-    // } catch (error) {
-    //   console.log(error);
-    // }
-    // if (formdata.url !== "") {
-    //   try {
-    //     const data = {
-    //       title: formdata.title,
-    //       description: formdata.description,
-    //       photo: formdata.url,
-    //     };
-    //     const post = await axios.post("posts/createPost", data, {
-    //       headers: { authorization: "Bearer " + localStorage.getItem("token") },
-    //     });
-    //     console.log(post);
-    //   } catch (error) {
-    //     M.toast({ html: error.response.data });
-    //   }
-    // }
     const url = await this.uploadFile();
     this.newPost(url);
   };

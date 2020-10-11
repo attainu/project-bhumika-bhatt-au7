@@ -13,13 +13,6 @@ class Posts extends Component {
     this.getUser();
   };
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.posts !== this.state.posts) {
-  //     this.getPosts();
-  //     this.getUser();
-  //   }
-  // }
-
   getUser = async () => {
     try {
       const User = await axios.get(
@@ -38,7 +31,6 @@ class Posts extends Component {
 
   getPosts = async () => {
     try {
-      // console.log(JSON.parse(localStorage.getItem("User")).token);
       const myPost = await axios.get("posts/myPost", {
         headers: {
           authorization:
@@ -47,7 +39,6 @@ class Posts extends Component {
       });
       this.setState({ posts: myPost.data });
     } catch (error) {
-      // M.toast({ html: error.response.data });
       console.log(error);
     }
   };

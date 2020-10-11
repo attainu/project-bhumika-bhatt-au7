@@ -11,12 +11,6 @@ class Navbar extends Component {
     searchValue: "",
   };
 
-  componentDidUpdate(prevProps, prevState) {
-    // if (prevState.searchedUser !== this.state.searchedUser) {
-    //   this.search(this.state.searchValue);
-    // }
-  }
-
   logoutHandler = (e) => {
     e.preventDefault();
 
@@ -44,7 +38,7 @@ class Navbar extends Component {
 
   search = async (query) => {
     try {
-      const user = await axios.post("http://localhost:5000/user/search", {
+      const user = await axios.post("/user/search", {
         query,
       });
       if (user) {
