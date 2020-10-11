@@ -9,6 +9,12 @@
   user-select: none;
 }
 
+#label {
+  margin: 10px 0 0 0;
+  text-align: center;
+  font-weight: bold;
+}
+
 .peopleImg {
   width: 40px;
   height: 40px;

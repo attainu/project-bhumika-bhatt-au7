@@ -94,9 +94,7 @@ const userController = {
       // Verify email account
       const verified = jwt.verify(req.params.token, process.env.SECRET_KEY);
       const user = await User.verification(verified._id);
-      res.send(
-        `<h4>Email Verification success, Please continue to login!!! click here to login <a href="http://localhost:3000">Login</a></h>`
-      );
+      res.redirect("http://localhost:3000");
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);

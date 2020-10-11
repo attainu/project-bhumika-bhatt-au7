@@ -68,7 +68,6 @@ const postController = {
     }
   },
   deletePost: async (req, res) => {
-    console.log(req.params.postId);
     try {
       const post = await Post.deletedPost(req.params.postId);
       if (!post) {

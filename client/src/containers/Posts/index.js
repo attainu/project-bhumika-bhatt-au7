@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import M from "materialize-css";
 
 import { ProfilePage } from "../../components";
 
@@ -55,7 +54,6 @@ class Posts extends Component {
 
   render() {
     const { userName, image } = JSON.parse(localStorage.getItem("User"));
-    const { user, posts } = this.state;
     return (
       <div>
         <ProfilePage

@@ -147,7 +147,6 @@ class Authentication extends Component {
   resetPassword = async (e) => {
     e.preventDefault();
     const { loginFormData } = this.state;
-    const { history } = this.props;
     const email = loginFormData.loginEmail;
     if (!email) {
       return M.toast({ html: "Please enter the email to reset the password!" });

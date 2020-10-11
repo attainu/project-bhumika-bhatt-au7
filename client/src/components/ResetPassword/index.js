@@ -19,7 +19,6 @@ const ResetPassword = (props) => {
             <span>connectX</span>
           </div>
         </Col>
-        ,
         <Col key={1} s={12} m={6} l={5} offset="m3 l1">
           <div className="hide-on-large-only brandMobile">
             <span>connectX</span>

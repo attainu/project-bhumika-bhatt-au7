@@ -44,7 +44,6 @@ class UserProfile extends Component {
   getPosts = async () => {
     const { userId } = this.props.computedMatch.params;
     try {
-      // console.log(JSON.parse(localStorage.getItem("User")).token);
       const posts = await axios.get(
         `http://localhost:5000/posts/userPosts/${userId}`,
         {
@@ -56,7 +55,6 @@ class UserProfile extends Component {
       );
       this.setState({ posts: posts.data });
     } catch (error) {
-      // M.toast({ html: error.response.data });
       console.log(error);
     }
   };
@@ -72,13 +70,11 @@ class UserProfile extends Component {
           headers: { authorization: "Bearer " + token },
         }
       );
-      console.log(user);
       localStorage.setItem("user", JSON.stringify(user.data.info));
       this.setState((prevState) => {
         const newFollower = prevState.userPosts.followers.filter(
           (item) => item !== user.data.info._id
         );
-        console.log(newFollower);
         return {
           ...prevState,
           user: {
@@ -117,7 +113,6 @@ class UserProfile extends Component {
     return (
       <div>
         <UserProfilePage
-          // posts={this.state.userPosts.posts}
           posts={this.state.posts}
           user={this.state.userPosts}
           follow={this.followUser}

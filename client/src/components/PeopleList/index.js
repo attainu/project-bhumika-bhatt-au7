@@ -13,7 +13,10 @@ const PeopleList = (props) => {
 
   return (
     <div className="peopleList white">
-      {followers &&
+      <div id="label">
+        <span>People</span>
+      </div>
+      {followers.length >= 1 ? (
         _.map(followers, (follower, idx) => {
           if (user.following) {
             for (let elm of user.following) {
@@ -60,7 +63,12 @@ const PeopleList = (props) => {
               }
             }
           }
-        })}
+        })
+      ) : (
+        <div style={{ textAlign: "center", fontSize: "12px" }}>
+          No connection to show
+        </div>
+      )}
     </div>
   );
 };

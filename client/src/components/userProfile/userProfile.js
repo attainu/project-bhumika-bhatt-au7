@@ -54,7 +54,12 @@ const userProfile = (props) => {
                   props.posts.map((item) => {
                     return (
                       // <div className="post3">
-                      <img className="post3" src={item.file} key={item._id} />
+                      <img
+                        className="post3"
+                        src={item.file}
+                        key={item._id}
+                        alt="Error fetching the post"
+                      />
                       //   <span></span>
                       // </div>
                     );

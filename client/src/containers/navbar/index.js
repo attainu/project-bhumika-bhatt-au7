@@ -47,7 +47,6 @@ class Navbar extends Component {
       const user = await axios.post("http://localhost:5000/user/search", {
         query,
       });
-      console.log(user);
       if (user) {
         this.setState({ searchedUser: user.data });
       }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, TextInput } from "react-materialize";
+import { TextInput } from "react-materialize";
 import _ from "lodash";
 
 import "./style.css";
