@@ -94,7 +94,7 @@ const userController = {
       // Verify email account
       const verified = jwt.verify(req.params.token, process.env.SECRET_KEY);
       const user = await User.verification(verified._id);
-      res.redirect("http://localhost:3000");
+      res.redirect("https://connectxapp.herokuapp.com/");
     } catch (error) {
       console.dir(error);
       res.status(400).send(error._message);
@@ -120,7 +120,7 @@ const userController = {
             from: "connectxapp@gmail.com",
             subject: "Reset Password",
             html: `<h3>Hello <mark>${user.firstName} ${user.lastName}</mark>. You requested for Password reset</h3>
-              <h5>click on this <a href="http://localhost:3000/reset/${resetToken}">link</a> to reset Password</h5>`,
+              <h5>click on this <a href="https://connectxapp.herokuapp.com/reset/${resetToken}">link</a> to reset Password</h5>`,
           });
         }
       });
